@@ -604,88 +604,295 @@
             <button class="pqk-chip" data-filter="logic" type="button"><i class="fas fa-calculator"></i> Logic & math</button>
         </nav>
 
-        <!-- game grid (each card has a picture area with icons) -->
+        <!-- game grid (each card has a picture area with images) -->
         <main class="pqk-grid">
-            <!-- Animal Match Puzzle - puzzle -->
+            <!-- Puzzle Games (5 games) -->
             <article class="pqk-game" data-category="puzzle">
-                <div class="pqk-game-picture"><i class="fas fa-puzzle-piece"></i></div>
+                <div class="pqk-game-picture"><img src="/images/027b84fad71d408eb0a234f9c2f7f654.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
                 <div class="pqk-game-content">
-                    <h2 class="pqk-game-title">Animal Match Puzzle</h2>
+                    <h2 class="pqk-game-title">Treasure Hunt Decoder</h2>
                     <span class="pqk-cat-tag"><i class="fas fa-puzzle-piece"></i> Puzzle</span>
-                    <p class="pqk-game-text">Flip tiles, spot the animal pairs, train memory & focus.</p>
+                    <p class="pqk-game-text">Solve riddles & unlock hidden treasures step by step.</p>
                     <div class="pqk-game-footer">
-                        <a href="#" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <a href="{{ route('games.play', ['gameId' => 'treasure-hunt-decoder']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
                         <span class="pqk-deco"><i class="fas fa-rotate-left"></i> 3 rounds</span>
                     </div>
                 </div>
             </article>
 
-            <!-- Panda Color Studio - coloring -->
-            <article class="pqk-game" data-category="coloring">
-                <div class="pqk-game-picture"><i class="fas fa-paint-brush"></i></div>
+            <article class="pqk-game" data-category="puzzle">
+                <div class="pqk-game-picture"><img src="/images/1cea69166c244bd899decd2488509d4c.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
                 <div class="pqk-game-content">
-                    <h2 class="pqk-game-title">Panda Color Studio</h2>
-                    <span class="pqk-cat-tag"><i class="fas fa-palette"></i> Coloring</span>
-                    <p class="pqk-game-text">Answer mini color quizzes, unlock palettes, decorate animals.</p>
+                    <h2 class="pqk-game-title">Shape Swapper Quest</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-puzzle-piece"></i> Puzzle</span>
+                    <p class="pqk-game-text">Match shapes, slide them into place, complete the picture.</p>
                     <div class="pqk-game-footer">
-                        <a href="#" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <a href="{{ route('games.play', ['gameId' => 'treasure-hunt-decoder']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <span class="pqk-deco"><i class="fas fa-book"></i> 2 levels</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pqk-game" data-category="puzzle">
+                <div class="pqk-game-picture"><img src="/images/2d29cc9fc14a4bd5911bcab8a2a9cf06.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div class="pqk-game-content">
+                    <h2 class="pqk-game-title">Pattern Builder Pro</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-puzzle-piece"></i> Puzzle</span>
+                    <p class="pqk-game-text">Complete patterns, spot the missing piece, keep the sequence flowing.</p>
+                    <div class="pqk-game-footer">
+                        <a href="{{ route('games.play', ['gameId' => 'shape-swapper-quest']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <span class="pqk-deco"><i class="fas fa-rotate-left"></i> 4 rounds</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pqk-game" data-category="puzzle">
+                <div class="pqk-game-picture"><img src="/images/355b7e3d99ea47d39e376d445b90c037.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div class="pqk-game-content">
+                    <h2 class="pqk-game-title">Tile Tumbler Master</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-puzzle-piece"></i> Puzzle</span>
+                    <p class="pqk-game-text">Flip & match tiles, train memory & spot-the-difference skills.</p>
+                    <div class="pqk-game-footer">
+                        <a href="{{ route('games.play', ['gameId' => 'pattern-builder-pro']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <span class="pqk-deco"><i class="fas fa-arrow-right"></i> 3 steps</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pqk-game" data-category="puzzle">
+                <div class="pqk-game-picture"><img src="/images/40d739d6f93f43eb9efeef152d4efa05.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div class="pqk-game-content">
+                    <h2 class="pqk-game-title">Lost Items Finder</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-puzzle-piece"></i> Puzzle</span>
+                    <p class="pqk-game-text">Find missing objects in busy scenes, observation challenge.</p>
+                    <div class="pqk-game-footer">
+                        <a href="{{ route('games.play', ['gameId' => 'tile-tumbler-master']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <span class="pqk-deco"><i class="fas fa-eye"></i> 5 levels</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Coloring Games (5 games) -->
+            <article class="pqk-game" data-category="coloring">
+                <div class="pqk-game-picture"><img src="/images/42675aa0355d4e90bf895483ba41c149.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div class="pqk-game-content">
+                    <h2 class="pqk-game-title">Rainbow Art Studio</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-palette"></i> Coloring</span>
+                    <p class="pqk-game-text">Paint & color amazing creatures, unlock new color palettes.</p>
+                    <div class="pqk-game-footer">
+                        <a href="{{ route('games.play', ['gameId' => 'lost-items-finder']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
                         <span class="pqk-deco"><i class="fas fa-eye"></i> no reading</span>
                     </div>
                 </div>
             </article>
 
-            <!-- Brainstorm Rockets - brain -->
-            <article class="pqk-game" data-category="brain">
-                <div class="pqk-game-picture"><i class="fas fa-lightbulb"></i></div>
+            <article class="pqk-game" data-category="coloring">
+                <div class="pqk-game-picture"><img src="/images/4553f4347c2246ec8ba67481c1fbaedb.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
                 <div class="pqk-game-content">
-                    <h2 class="pqk-game-title">Brainstorm Rockets</h2>
-                    <span class="pqk-cat-tag"><i class="fas fa-brain"></i> Brainstorm</span>
-                    <p class="pqk-game-text">Quick‑fire “what if” questions & silly riddles.</p>
+                    <h2 class="pqk-game-title">Splash Paint Adventure</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-palette"></i> Coloring</span>
+                    <p class="pqk-game-text">Drag colors, splash & blend, create beautiful artwork.</p>
                     <div class="pqk-game-footer">
-                        <a href="#" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <a href="{{ route('games.play', ['gameId' => 'rainbow-art-studio']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <span class="pqk-deco"><i class="fas fa-brush"></i> freestyle</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pqk-game" data-category="coloring">
+                <div class="pqk-game-picture"><img src="/images/514ac8d0a601421e8a28bc2ec18f64de.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div class="pqk-game-content">
+                    <h2 class="pqk-game-title">Magic Color Quiz</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-palette"></i> Coloring</span>
+                    <p class="pqk-game-text">Answer color questions, mix pigments, create new shades.</p>
+                    <div class="pqk-game-footer">
+                        <a href="{{ route('games.play', ['gameId' => 'magic-color-quiz']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <span class="pqk-deco"><i class="fas fa-palette"></i> 8 colors</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pqk-game" data-category="coloring">
+                <div class="pqk-game-picture"><img src="/images/5cad7468048945b2a0cd32ac22f413b2.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div class="pqk-game-content">
+                    <h2 class="pqk-game-title">Pigment Palace</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-palette"></i> Coloring</span>
+                    <p class="pqk-game-text">Design & color fantasy rooms, unlock accessories.</p>
+                    <div class="pqk-game-footer">
+                        <a href="{{ route('games.play', ['gameId' => 'splash-paint-adventure']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <span class="pqk-deco"><i class="fas fa-star"></i> 10 rooms</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pqk-game" data-category="coloring">
+                <div class="pqk-game-picture"><img src="/images/6af6bcf3424a4a0b9a5b93346ebe88bc.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div class="pqk-game-content">
+                    <h2 class="pqk-game-title">Brushstroke Blends</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-palette"></i> Coloring</span>
+                    <p class="pqk-game-text">Layer colors, blend smoothly, master the art of painting.</p>
+                    <div class="pqk-game-footer">
+                        <a href="{{ route('games.play', ['gameId' => 'magic-color-quiz']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <span class="pqk-deco"><i class="fas fa-brush"></i> gallery</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Brain Games (4 games) -->
+            <article class="pqk-game" data-category="brain">
+                <div class="pqk-game-picture"><img src="/images/6c2add4dc9054ef783d30d16cd56c336.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div class="pqk-game-content">
+                    <h2 class="pqk-game-title">Riddle Racers</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-brain"></i> Brainstorm</span>
+                    <p class="pqk-game-text">Quick funny riddles, silly answers, laugh & learn challenges.</p>
+                    <div class="pqk-game-footer">
+                        <a href="{{ route('games.play', ['gameId' => 'pigment-palace']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
                         <span class="pqk-deco"><i class="fas fa-hourglass-half"></i> 5 min</span>
                     </div>
                 </div>
             </article>
 
-            <!-- Remember the Picnic - memory -->
-            <article class="pqk-game" data-category="memory">
-                <div class="pqk-game-picture"><i class="fas fa-utensils"></i></div>
+            <article class="pqk-game" data-category="brain">
+                <div class="pqk-game-picture"><img src="/images/6d28b465fd1440aa996c7b4c03d55b25.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
                 <div class="pqk-game-content">
-                    <h2 class="pqk-game-title">Remember the Picnic</h2>
-                    <span class="pqk-cat-tag"><i class="fas fa-eye"></i> Memory</span>
-                    <p class="pqk-game-text">Peek at Panda’s basket – what stayed? what sneaked away?</p>
+                    <h2 class="pqk-game-title">What If Wonderland</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-brain"></i> Brainstorm</span>
+                    <p class="pqk-game-text">Imagine wild scenarios, make silly decisions, explore imagination.</p>
                     <div class="pqk-game-footer">
-                        <a href="#" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <a href="{{ route('games.play', ['gameId' => 'brushstroke-blends']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <span class="pqk-deco"><i class="fas fa-lightbulb"></i> endless</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pqk-game" data-category="brain">
+                <div class="pqk-game-picture"><img src="/images/6e8212d4e6f54070b7331bf5eccbad74.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div class="pqk-game-content">
+                    <h2 class="pqk-game-title">Silly Stories Spinner</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-brain"></i> Brainstorm</span>
+                    <p class="pqk-game-text">Build weird tales, mix characters & adventures together.</p>
+                    <div class="pqk-game-footer">
+                        <a href="{{ route('games.play', ['gameId' => 'riddle-racers']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <span class="pqk-deco"><i class="fas fa-book"></i> stories</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pqk-game" data-category="brain">
+                <div class="pqk-game-picture"><img src="/images/7bf7ab72e8214685baa6707cdbd7142d.png" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div class="pqk-game-content">
+                    <h2 class="pqk-game-title">Think Fast Challenge</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-brain"></i> Brainstorm</span>
+                    <p class="pqk-game-text">Quick questions, snap decisions, test your quick thinking.</p>
+                    <div class="pqk-game-footer">
+                        <a href="{{ route('games.play', ['gameId' => 'what-if-wonderland']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <span class="pqk-deco"><i class="fas fa-bolt"></i> timed</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Memory Games (4 games) -->
+            <article class="pqk-game" data-category="memory">
+                <div class="pqk-game-picture"><img src="/images/8bc0900d81fe449690b88a12f31b9cf6.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div class="pqk-game-content">
+                    <h2 class="pqk-game-title">Memory Mansion</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-eye"></i> Memory</span>
+                    <p class="pqk-game-text">Peek at rooms, remember furniture, spot what moved.</p>
+                    <div class="pqk-game-footer">
+                        <a href="{{ route('games.play', ['gameId' => 'silly-stories-spinner']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
                         <span class="pqk-deco"><i class="fas fa-arrows-rotate"></i> replay</span>
                     </div>
                 </div>
             </article>
 
-            <!-- Panda Logic Lab - logic -->
-            <article class="pqk-game" data-category="logic">
-                <div class="pqk-game-picture"><i class="fas fa-calculator"></i></div>
+            <article class="pqk-game" data-category="memory">
+                <div class="pqk-game-picture"><img src="/images/998baa345845479abda3fbf45d29e48f.gif" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
                 <div class="pqk-game-content">
-                    <h2 class="pqk-game-title">Panda Logic Lab</h2>
-                    <span class="pqk-cat-tag"><i class="fas fa-abacus"></i> Logic & math</span>
-                    <p class="pqk-game-text">Simple math stories, patterns, true/false challenges.</p>
+                    <h2 class="pqk-game-title">Sequence Snapshot</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-eye"></i> Memory</span>
+                    <p class="pqk-game-text">Watch sequences flash, remember the order, tap them back.</p>
                     <div class="pqk-game-footer">
-                        <a href="#" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <a href="{{ route('games.play', ['gameId' => 'think-fast-challenge']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <span class="pqk-deco"><i class="fas fa-square"></i> 6 levels</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pqk-game" data-category="memory">
+                <div class="pqk-game-picture"><img src="/images/a3c687ded3f14e45b94631c0dfd8c6c8.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div class="pqk-game-content">
+                    <h2 class="pqk-game-title">Picture Perfect Pairs</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-eye"></i> Memory</span>
+                    <p class="pqk-game-text">Match identical pictures, train focus & recognition skills.</p>
+                    <div class="pqk-game-footer">
+                        <a href="{{ route('games.play', ['gameId' => 'memory-mansion']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <span class="pqk-deco"><i class="fas fa-star"></i> trophies</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pqk-game" data-category="memory">
+                <div class="pqk-game-picture"><img src="/images/bb30a208eda647b3a8026d5ef18eca78.png" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div class="pqk-game-content">
+                    <h2 class="pqk-game-title">Watch & Recall</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-eye"></i> Memory</span>
+                    <p class="pqk-game-text">Observe carefully, cover up, recall what you saw.</p>
+                    <div class="pqk-game-footer">
+                        <a href="{{ route('games.play', ['gameId' => 'sequence-snapshot']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <span class="pqk-deco"><i class="fas fa-check"></i> 4 rounds</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Logic & Math Games (4 games) -->
+            <article class="pqk-game" data-category="logic">
+                <div class="pqk-game-picture"><img src="/images/c6289d78da9e4e388979eed008326da7.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div class="pqk-game-content">
+                    <h2 class="pqk-game-title">Number Ninja</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-abacus"></i> Logic & math</span>
+                    <p class="pqk-game-text">Simple additions, subtractions, counting in fun ways.</p>
+                    <div class="pqk-game-footer">
+                        <a href="{{ route('games.play', ['gameId' => 'picture-perfect-pairs']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
                         <span class="pqk-deco"><i class="fas fa-chart-simple"></i> 3 steps</span>
                     </div>
                 </div>
             </article>
 
-            <!-- Word Forest Quiz - puzzle -->
-            <article class="pqk-game" data-category="puzzle">
-                <div class="pqk-game-picture"><i class="fas fa-tree"></i></div>
+            <article class="pqk-game" data-category="logic">
+                <div class="pqk-game-picture"><img src="/images/cce333d2755645d8a70bd2492c008843.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
                 <div class="pqk-game-content">
-                    <h2 class="pqk-game-title">Word Forest Quiz</h2>
-                    <span class="pqk-cat-tag"><i class="fas fa-font"></i> Puzzle</span>
-                    <p class="pqk-game-text">Pick the right word leaves, grow a forest of vocabulary.</p>
+                    <h2 class="pqk-game-title">Pattern Prophecy</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-abacus"></i> Logic & math</span>
+                    <p class="pqk-game-text">Spot patterns, predict sequences, grow number sense.</p>
                     <div class="pqk-game-footer">
-                        <a href="#" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
-                        <span class="pqk-deco"><i class="fas fa-book"></i> words</span>
+                        <a href="{{ route('games.play', ['gameId' => 'watch-and-recall']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <span class="pqk-deco"><i class="fas fa-arrow-right"></i> progressive</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pqk-game" data-category="logic">
+                <div class="pqk-game-picture"><img src="/images/e0639629f2b54d6c886d216b6cac4bbb.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div class="pqk-game-content">
+                    <h2 class="pqk-game-title">True or False Factory</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-abacus"></i> Logic & math</span>
+                    <p class="pqk-game-text">Decide if statements are right or wrong, test logic skills.</p>
+                    <div class="pqk-game-footer">
+                        <a href="{{ route('games.play', ['gameId' => 'true-or-false-factory']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <span class="pqk-deco"><i class="fas fa-check"></i> 5 levels</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="pqk-game" data-category="logic">
+                <div class="pqk-game-picture"><img src="/images/f7f0049ef49b40f286b11ddb6a430ed7.jpg" alt="game" style="width:100%; height:100%; object-fit:cover;"></div>
+                <div class="pqk-game-content">
+                    <h2 class="pqk-game-title">Sort & Stack Strategy</h2>
+                    <span class="pqk-cat-tag"><i class="fas fa-abacus"></i> Logic & math</span>
+                    <p class="pqk-game-text">Sort objects by size, color, or type, organize & match.</p>
+                    <div class="pqk-game-footer">
+                        <a href="{{ route('games.play', ['gameId' => 'sort-and-stack-strategy']) }}" class="pqk-play"><i class="fas fa-play"></i> Play now</a>
+                        <span class="pqk-deco"><i class="fas fa-cube"></i> stacking</span>
                     </div>
                 </div>
             </article>
