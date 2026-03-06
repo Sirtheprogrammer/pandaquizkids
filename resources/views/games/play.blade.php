@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="width:100%;height:100%;margin:0;padding:0;">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Color Quest!</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;900&display=swap');
 
 :root{--correct:#2ECC71;--wrong:#E74C3C;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
-  background:linear-gradient(180deg,#87CEEB 0%,#B8E8FF 52%,#6EC840 52%,#4DA830 100%);position:relative;}
+html{width:100%;height:100%;overflow:hidden;}
+body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;max-width:100%;max-height:100%;
+  background:linear-gradient(180deg,#87CEEB 0%,#B8E8FF 52%,#6EC840 52%,#4DA830 100%);position:relative;touch-action:manipulation;cursor:none;}
 
 /* ══ LOADING ══ */
 #loading-screen{position:fixed;inset:0;z-index:9999;
@@ -65,6 +66,12 @@ body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
 .fence{position:absolute;bottom:55px;left:0;right:0;display:flex;gap:6px;padding:0 10px;z-index:6;pointer-events:none;}
 .fence-post{width:18px;height:35px;background:linear-gradient(#C8A46A,#A07840);border-radius:3px 3px 0 0;flex-shrink:0;}
 .fence-rail{position:absolute;left:0;right:0;height:8px;background:linear-gradient(#D4B07A,#B08040);border-radius:4px;}
+
+/* ══ CUSTOM MOUSE CURSOR ══ */
+#custom-cursor{position:fixed;width:50px;height:50px;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:0;transition:opacity 0.3s ease;}
+#custom-cursor.active{opacity:1;}
+#custom-cursor svg{width:100%;height:100%;filter:drop-shadow(0 0 8px rgba(155,89,182,0.6)) drop-shadow(0 0 16px rgba(155,89,182,0.3));animation:cursorGlow 1.5s ease-in-out infinite;}
+@keyframes cursorGlow{0%,100%{filter:drop-shadow(0 0 8px rgba(155,89,182,0.6)) drop-shadow(0 0 16px rgba(155,89,182,0.3)) brightness(1);}50%{filter:drop-shadow(0 0 12px rgba(155,89,182,0.8)) drop-shadow(0 0 24px rgba(155,89,182,0.5)) brightness(1.15);}}
 
 /* ══ MASCOT ══ */
 #mascot-wrap{position:absolute;left:52px;bottom:62px;z-index:10;width:115px;}
@@ -339,6 +346,18 @@ body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
   <h1>You Win!</h1>
   <p id="wscore"></p>
   <button id="win-btn" onclick="restart()">Play Again!</button>
+</div>
+
+<!-- CUSTOM CURSOR -->
+<div id="custom-cursor">
+  <svg viewBox="0 0 50 50">
+    <!-- Arrow body -->
+    <path d="M 10 8 L 32 30 L 22 32 L 24 44 L 18 38 L 8 40 Z" fill="#9B59B6" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+    <!-- Shine effect -->
+    <ellipse cx="18" cy="16" rx="6" ry="4" fill="white" opacity="0.6"/>
+    <!-- Tip accent -->
+    <circle cx="32" cy="30" r="3" fill="#FFD700" opacity="0.8"/>
+  </svg>
 </div>
 
 <script>
@@ -653,7 +672,8 @@ function pickColors(n){
   const pool=[...Array(COLORS.length).keys()];shuf(pool);return pool.slice(0,n);}
 
 function buildLevels(){
-  return LEVEL_DEFS.map(def=>{
+  // Build levels then shuffle them for variety
+  const builtLevels = LEVEL_DEFS.map(def=>{
     if(def.t==='color'){
       const ci=COLORS.findIndex(c=>c.name===def.cc);
       const ws=[];
@@ -674,6 +694,8 @@ function buildLevels(){
       return{t:'number',num:def.num,cards:nums.map((n,i)=>({type:'number',num:n,color:COLORS[colIdxs[i]]})),ci:nums.indexOf(def.num)};
     }
   });
+  // Shuffle the levels array to randomize order each playthrough
+  return shuf(builtLevels);
 }
 
 /* ══════════════════════════════════════════
@@ -974,6 +996,28 @@ document.addEventListener('click',()=>{
     document.getElementById('music-btn').classList.add('active');
   }
 },{once:true});
+
+/* ══════════════════════════════════════════
+   CUSTOM CURSOR TRACKING
+══════════════════════════════════════════ */
+let cursorX = 0, cursorY = 0;
+const cursEl = document.getElementById('custom-cursor');
+
+document.addEventListener('mousemove', (e) => {
+  cursorX = e.clientX;
+  cursorY = e.clientY;
+  cursEl.style.left = cursorX + 'px';
+  cursEl.style.top = cursorY + 'px';
+  cursEl.classList.add('active');
+});
+
+document.addEventListener('mouseleave', () => {
+  cursEl.classList.remove('active');
+});
+
+document.addEventListener('mouseenter', () => {
+  cursEl.classList.add('active');
+});
 </script>
 </body>
 </html>
