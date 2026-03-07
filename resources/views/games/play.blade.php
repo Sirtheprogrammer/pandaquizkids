@@ -896,6 +896,7 @@ function danceMascot(){
 function hideMascot(){
   const m=document.getElementById('mascot');
   const b=document.getElementById('cbubble');
+  SFX.missSound();
   b.textContent=REACTIONS.hide[Math.floor(Math.random()*REACTIONS.hide.length)];
   m.className='hide';b.classList.add('show');
   setTimeout(()=>{m.className='';b.classList.remove('show');},1400);
