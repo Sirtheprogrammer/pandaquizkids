@@ -82,6 +82,18 @@ body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
 }
 #mascot.sad{animation:mascotSad .6s ease both;}
 @keyframes mascotSad{0%,100%{transform:translateX(0);}25%{transform:translateX(-14px) rotate(-5deg);}75%{transform:translateX(14px) rotate(5deg);}}
+#mascot.thinking{animation:mascotThink 2s ease-in-out infinite;}
+@keyframes mascotThink{0%{transform:translateX(0) rotate(0deg);}25%{transform:translateX(8px) rotate(4deg);}50%{transform:translateX(0) rotate(0deg);}75%{transform:translateX(-8px) rotate(-4deg);}100%{transform:translateX(0) rotate(0deg);}}
+#mascot.dance{animation:mascotDance 1.4s cubic-bezier(0.34,1.2,0.64,1) forwards;}
+@keyframes mascotDance{0%{transform:translateY(0) scale(1) rotate(0deg);}15%{transform:translateY(-35px) scale(1.08) rotate(-8deg);}30%{transform:translateY(-50px) scale(1.12) rotate(12deg);}45%{transform:translateY(-35px) scale(1.08) rotate(-8deg);}60%{transform:translateY(0) scale(1) rotate(0deg);}75%{transform:translateY(-28px) scale(1.06) rotate(6deg);}100%{transform:translateY(0) scale(1) rotate(0deg);}}
+#mascot.hide{animation:mascotHide 1.2s ease both;}
+@keyframes mascotHide{0%,100%{transform:scale(1) rotate(0deg);}50%{transform:scale(0.85) rotate(-15deg);}}
+#mascot.nod{animation:mascotNod 1s ease-in-out forwards;}
+@keyframes mascotNod{0%{transform:translateY(0) rotate(0deg);}25%{transform:translateY(-12px) rotate(-8deg);}50%{transform:translateY(0) rotate(2deg);}75%{transform:translateY(-10px) rotate(-6deg);}100%{transform:translateY(0) rotate(0deg);}}
+#mascot.wave{animation:mascotWave 1.2s ease-in-out forwards;}
+@keyframes mascotWave{0%{transform:translateX(0) scale(1);}20%{transform:translateX(15px) scale(1) skewX(8deg);}40%{transform:translateX(20px) scale(1.05) skewX(-8deg);}60%{transform:translateX(15px) scale(1) skewX(6deg);}80%{transform:translateX(10px) scale(0.98) skewX(-4deg);}100%{transform:translateX(0) scale(1) skewX(0deg);}}
+#mascot.impressed{animation:mascotImpressed 1.6s cubic-bezier(0.34,1.2,0.64,1) forwards;}
+@keyframes mascotImpressed{0%{transform:scale(1) rotate(0deg);}20%{transform:scale(1.15) rotate(0deg);}40%{transform:scale(1.2) rotate(4deg);}60%{transform:scale(1.18) rotate(-3deg);}100%{transform:scale(1) rotate(0deg);}}
 #cbubble{position:absolute;bottom:110%;left:50%;transform:translateX(-50%) scale(0);
   background:linear-gradient(135deg,#FFD700,#FF9800);border:3px solid white;border-radius:20px;
   padding:5px 14px;font-size:clamp(12px,3vw,15px);color:white;white-space:nowrap;
@@ -678,11 +690,12 @@ const GREETS=['Amazing!','Superstar!','Brilliant!','Perfect!','Wow!','Nailed it!
 /* ══════════════════════════════════════════
    GAME STATE
 ══════════════════════════════════════════ */
-let levels=[],cur=0,score=0,answered=false;
+let levels=[],cur=0,score=0,answered=false,streak=0;
 
 function restart(){
-  levels=buildLevels();cur=0;score=0;answered=false;
+  levels=buildLevels();cur=0;score=0;answered=false;streak=0;
   document.getElementById('win-screen').style.display='none';
+  setTimeout(()=>waveMascot(),800);
   load();
 }
 
@@ -784,6 +797,7 @@ function pick(card,idx,L){
     card.classList.add('correct');
     addBadge(card,true);
     score+=10+Math.max(0,40-cur);
+    streak++;
     document.getElementById('snum').textContent=score;
     setTimeout(SFX.ok,50);
     showFB(true);spawnParticles(card);cheerMascot();
@@ -795,7 +809,8 @@ function pick(card,idx,L){
     card.classList.add('wrong');addBadge(card,false);
     setTimeout(()=>{const cs=document.querySelectorAll('.choice-card');cs[L.ci].classList.add('correct');addBadge(cs[L.ci],true);},380);
     SFX.no();showFB(false);
-    sadMascot();
+    streak=0;
+    hideMascot();
     setTimeout(()=>{hideFB();cur++;if(cur>=40)return winScreen();
       document.getElementById('nhint').classList.add('show');
       document.getElementById('nhint').style.bottom=calcHintBottom()+'px';
@@ -817,13 +832,19 @@ function addBadge(card,ok){
 /* ══════════════════════════════════════════
    MASCOT CHEER
 ══════════════════════════════════════════ */
-function cheerMascot(){
+function basicCheer(){
   const m=document.getElementById('mascot');
   const b=document.getElementById('cbubble');
   SFX.winSound();
-  b.textContent='WOOOW!';
+  b.textContent=REACTIONS.cheer[Math.floor(Math.random()*REACTIONS.cheer.length)];
   m.className='cheer';b.classList.add('show');
   setTimeout(()=>{m.className='';b.classList.remove('show');},2200);
+}
+
+function cheerMascot(){
+  if(streak>=10)impressedMascot();
+  else if(streak>=5)danceMascot();
+  else basicCheer();
 }
 
 /* ══════════════════════════════════════════
@@ -836,6 +857,69 @@ function sadMascot(){
   b.textContent='NOOO!';
   m.className='sad';b.classList.add('show');
   setTimeout(()=>{m.className='';b.classList.remove('show');},1200);
+}
+
+/* ═══════════════════════════════════════════
+   MORE MASCOT REACTIONS
+═══════════════════════════════════════════ */
+const REACTIONS={
+  cheer:['WOOOW!','Amazing!','Superstar!','Perfect!','Brilliant!'],
+  dance:['Rock Star!','Incredible!','That was AWESOME!','You Crush It!','So Cool!'],
+  thinking:['Hmm...','Think...','What could it be?'],
+  hide:['Oops!','Oh no!','Try again!','No worries!'],
+  nod:['Good try!','Getting close!','Almost there!','You got this!'],
+  wave:['Hello!','Welcome!','Let\'s play!','Let\'s go!'],
+  impressed:['WOW!','GENIUS!','Outstanding!','Unbelievable!','LEGEND!']
+};
+
+function thinkingMascot(){
+  const m=document.getElementById('mascot');
+  const b=document.getElementById('cbubble');
+  b.textContent=REACTIONS.thinking[Math.floor(Math.random()*REACTIONS.thinking.length)];
+  m.className='thinking';b.classList.add('show');
+  setTimeout(()=>{m.className='';b.classList.remove('show');},2200);
+}
+
+function danceMascot(){
+  const m=document.getElementById('mascot');
+  const b=document.getElementById('cbubble');
+  SFX.winSound();
+  b.textContent=REACTIONS.dance[Math.floor(Math.random()*REACTIONS.dance.length)];
+  m.className='dance';b.classList.add('show');
+  setTimeout(()=>{m.className='';b.classList.remove('show');},1600);
+}
+
+function hideMascot(){
+  const m=document.getElementById('mascot');
+  const b=document.getElementById('cbubble');
+  b.textContent=REACTIONS.hide[Math.floor(Math.random()*REACTIONS.hide.length)];
+  m.className='hide';b.classList.add('show');
+  setTimeout(()=>{m.className='';b.classList.remove('show');},1400);
+}
+
+function nodMascot(){
+  const m=document.getElementById('mascot');
+  const b=document.getElementById('cbubble');
+  b.textContent=REACTIONS.nod[Math.floor(Math.random()*REACTIONS.nod.length)];
+  m.className='nod';b.classList.add('show');
+  setTimeout(()=>{m.className='';b.classList.remove('show');},1200);
+}
+
+function waveMascot(){
+  const m=document.getElementById('mascot');
+  const b=document.getElementById('cbubble');
+  b.textContent=REACTIONS.wave[Math.floor(Math.random()*REACTIONS.wave.length)];
+  m.className='wave';b.classList.add('show');
+  setTimeout(()=>{m.className='';b.classList.remove('show');},1400);
+}
+
+function impressedMascot(){
+  const m=document.getElementById('mascot');
+  const b=document.getElementById('cbubble');
+  SFX.winSound();
+  b.textContent=REACTIONS.impressed[Math.floor(Math.random()*REACTIONS.impressed.length)];
+  m.className='impressed';b.classList.add('show');
+  setTimeout(()=>{m.className='';b.classList.remove('show');},1800);
 }
 
 /* ══════════════════════════════════════════
