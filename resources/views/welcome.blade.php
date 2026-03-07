@@ -103,6 +103,10 @@
         }
 
         /* ---------- RESET & FULLSCREEN ---------- */
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -111,7 +115,7 @@
 
         .pqk-full {
             width: 100%;
-            padding: 1rem 1.2rem 2rem;
+            padding: 0 1.2rem 2rem;
         }
 
         /* ---------- HEADER with hamburger + theme toggle (nowrap fix) ---------- */
@@ -119,13 +123,14 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 2rem;
+            margin: 0 -1.2rem 2rem -1.2rem;
             gap: 0.5rem;                /* reduced gap for tight screens */
             flex-wrap: nowrap;           /* force single line */
             background: linear-gradient(135deg, #FF1F66 0%, #E91E8C 100%);
-            padding: 1rem;
+            padding: 1rem 1.2rem;
             border-radius: 0 0 20px 20px;
             box-shadow: 0 4px 12px rgba(255,31,102,0.3);
+            width: calc(100% + 2.4rem);
         }
 
         .pqk-brand {
