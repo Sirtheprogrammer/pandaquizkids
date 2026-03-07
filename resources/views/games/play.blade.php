@@ -92,7 +92,7 @@ body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
   width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:12px solid #FF9800;}
 #cbubble.show{transform:translateX(-50%) scale(1);}
 @media(max-width:599px){
-  #mascot-wrap{left:8px;bottom:clamp(55px,14vw,80px);width:clamp(100px,25vw,150px);}
+  #mascot-wrap{left:8px;bottom:clamp(55px,14vw,80px);width:clamp(200px,45vw,300px);}
   #mascot{width:100%;}
 }
 @media(max-width:380px){#mascot-wrap{display:none;}}
@@ -240,6 +240,10 @@ body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
   <div class="load-txt">LOADING LEVELS...</div>
 </div>
 
+<!-- AUDIO EFFECTS -->
+<audio id="audio-win" src="/sounds/waooh_sound.mp3" preload="auto"></audio>
+<audio id="audio-miss" src="/sounds/no_sound.mp3" preload="auto"></audio>
+
 <!-- ENV -->
 <div id="cloud-wrap"></div>
 <div id="tree-wrap"></div>
@@ -335,6 +339,8 @@ const SFX={
   win:()=>[523,659,784,1047,1319,1568].forEach((f,i)=>tone(f,'sine',.3,.26,i*110)),
   load:()=>[330,415,523].forEach((f,i)=>tone(f,'sine',.4,.18,i*200)),
   click:()=>tone(660,'sine',.07,.1),
+  winSound:()=>{try{const a=document.getElementById('audio-win');if(a){a.currentTime=0;a.play().catch(e=>{});};}catch(e){}},
+  missSound:()=>{try{const a=document.getElementById('audio-miss');if(a){a.currentTime=0;a.play().catch(e=>{});};}catch(e){}},
 };
 
 /* ── BACKGROUND MUSIC ── */
@@ -793,7 +799,7 @@ function pick(card,idx,L){
     card.classList.add('wrong');addBadge(card,false);
     setTimeout(()=>{const cs=document.querySelectorAll('.choice-card');cs[L.ci].classList.add('correct');addBadge(cs[L.ci],true);},380);
     SFX.no();showFB(false);
-    const m=document.getElementById('mascot');m.className='sad';setTimeout(()=>m.className='',1200);
+    sadMascot();
     setTimeout(()=>{hideFB();cur++;if(cur>=40)return winScreen();
       document.getElementById('nhint').classList.add('show');
       document.getElementById('nhint').style.bottom=calcHintBottom()+'px';
@@ -818,9 +824,22 @@ function addBadge(card,ok){
 function cheerMascot(){
   const m=document.getElementById('mascot');
   const b=document.getElementById('cbubble');
-  b.textContent=GREETS[Math.floor(Math.random()*GREETS.length)];
+  SFX.winSound();
+  b.textContent='WOOOW!';
   m.className='cheer';b.classList.add('show');
   setTimeout(()=>{m.className='';b.classList.remove('show');},2200);
+}
+
+/* ══════════════════════════════════════════
+   MASCOT SAD (MISSED)
+══════════════════════════════════════════ */
+function sadMascot(){
+  const m=document.getElementById('mascot');
+  const b=document.getElementById('cbubble');
+  SFX.missSound();
+  b.textContent='NOOO!';
+  m.className='sad';b.classList.add('show');
+  setTimeout(()=>{m.className='';b.classList.remove('show');},1200);
 }
 
 /* ══════════════════════════════════════════
