@@ -15,79 +15,79 @@
     <style>
         /* ---------- CSS VARIABLES FOR LIGHT & DARK THEMES ---------- */
         :root {
-            /* light theme (default) */
-            --bg-body: #FFFBEA;          /* warm creamy */
-            --text-primary: #1F2A44;      /* deep navy */
-            --text-secondary: #2F3A5A;
-            --accent-orange: #E05A2F;
-            --accent-light: #FFEAD2;
-            --accent-yellow: #FFE893;
-            --accent-panel: #FFD985;
-            --header-icon-bg: #1F2A44;
-            --header-icon-text: #FFDDA9;
-            --header-shadow: #0F1A2E;
-            --chip-bg: #FFF;
-            --chip-border: #1F2A44;
-            --chip-shadow: #1F2A44;
-            --chip-active-bg: #1F2A44;
-            --chip-active-text: #FFE893;
+            /* light theme (default) - MashaQuiz inspired */
+            --bg-body: #F5F5F5;           /* light gray */
+            --text-primary: #333333;      /* dark gray */
+            --text-secondary: #666666;
+            --accent-orange: #FF6B35;
+            --accent-light: #FFE5D9;
+            --accent-yellow: #FFD700;
+            --accent-panel: #FFE082;
+            --header-icon-bg: #FF1F66;    /* hot pink */
+            --header-icon-text: #FFFFFF;
+            --header-shadow: #C41551;
+            --chip-bg: #FFFFFF;
+            --chip-border: #FF1F66;
+            --chip-shadow: #FF1F66;
+            --chip-active-bg: #FF1F66;
+            --chip-active-text: #FFFFFF;
             --card-bg: #FFFFFF;
-            --card-border: #1F2A44;
-            --card-shadow: #1F2A44;
+            --card-border: #EEEEEE;
+            --card-shadow: #CCCCCC;
             --picture-overlay: none;
-            --tag-bg: #FFE893;
-            --tag-border: #1F2A44;
-            --play-bg: #1F2A44;
-            --play-text: #FFE893;
-            --play-shadow: #0F1A2E;
-            --sidebar-bg: #FFA177;        /* peachy */
-            --sidebar-border: #1F2A44;
-            --sidebar-link-bg: #FFEC9E;
-            --sidebar-link-shadow: #1F2A44;
-            --footer-bg: #FFD985;
-            --footer-border: #1F2A44;
-            --footer-text: #1F2A44;
-            --menu-btn-bg: #1F2A44;
-            --menu-btn-text: #FFE893;
-            --overlay-bg: rgba(0,0,0,0.3);
+            --tag-bg: #FFE082;
+            --tag-border: #FFC107;
+            --play-bg: #FF1F66;
+            --play-text: #FFFFFF;
+            --play-shadow: #C41551;
+            --sidebar-bg: #FF1F66;        /* hot pink */
+            --sidebar-border: #FFFFFF;
+            --sidebar-link-bg: #FFD700;
+            --sidebar-link-shadow: #FF1F66;
+            --footer-bg: #FF1F66;
+            --footer-border: #FFFFFF;
+            --footer-text: #FFFFFF;
+            --menu-btn-bg: #FFFFFF;
+            --menu-btn-text: #FF1F66;
+            --overlay-bg: rgba(0,0,0,0.4);
             --icon-color: inherit;
         }
 
         /* dark theme */
         .dark-theme {
-            --bg-body: #1E1E2F;           /* deep blue‑gray */
-            --text-primary: #F7F0D6;       /* soft cream */
-            --text-secondary: #CBC6B4;
-            --accent-orange: #FF8C5A;
-            --accent-light: #3A2E28;
-            --accent-yellow: #E0B84D;
-            --accent-panel: #3A3A4F;
-            --header-icon-bg: #F7F0D6;
-            --header-icon-text: #1E1E2F;
-            --header-shadow: #0B0B15;
-            --chip-bg: #2D2D3F;
-            --chip-border: #F7F0D6;
-            --chip-shadow: #F7F0D6;
-            --chip-active-bg: #F7F0D6;
-            --chip-active-text: #1E1E2F;
-            --card-bg: #2A2A3C;
-            --card-border: #F7F0D6;
-            --card-shadow: #F7F0D6;
-            --tag-bg: #3A3A4F;
-            --tag-border: #F7F0D6;
-            --play-bg: #F7F0D6;
-            --play-text: #1E1E2F;
-            --play-shadow: #8A7F66;
-            --sidebar-bg: #2C2C40;
-            --sidebar-border: #F7F0D6;
-            --sidebar-link-bg: #3E3E58;
-            --sidebar-link-shadow: #F7F0D6;
-            --footer-bg: #2C2C40;
-            --footer-border: #F7F0D6;
-            --footer-text: #F7F0D6;
-            --menu-btn-bg: #F7F0D6;
-            --menu-btn-text: #1E1E2F;
-            --overlay-bg: rgba(0,0,0,0.6);
+            --bg-body: #1A1A1A;           /* very dark */
+            --text-primary: #FFFFFF;       /* white */
+            --text-secondary: #E0E0E0;
+            --accent-orange: #FF6B35;
+            --accent-light: #2A2A2A;
+            --accent-yellow: #FFD700;
+            --accent-panel: #2A2A2A;
+            --header-icon-bg: #FF1F66;
+            --header-icon-text: #FFFFFF;
+            --header-shadow: #C41551;
+            --chip-bg: #2A2A2A;
+            --chip-border: #FF1F66;
+            --chip-shadow: #FF1F66;
+            --chip-active-bg: #FF1F66;
+            --chip-active-text: #FFFFFF;
+            --card-bg: #2A2A2A;
+            --card-border: #FF1F66;
+            --card-shadow: #FF1F66;
+            --tag-bg: #FF1F66;
+            --tag-border: #FFFFFF;
+            --play-bg: #FF1F66;
+            --play-text: #FFFFFF;
+            --play-shadow: #C41551;
+            --sidebar-bg: #FF1F66;
+            --sidebar-border: #FFFFFF;
+            --sidebar-link-bg: #FFD700;
+            --sidebar-link-shadow: #FF1F66;
+            --footer-bg: #FF1F66;
+            --footer-border: #FFFFFF;
+            --footer-text: #FFFFFF;
+            --menu-btn-bg: #FFFFFF;
+            --menu-btn-text: #FF1F66;
+            --overlay-bg: rgba(0,0,0,0.7);
             --icon-color: inherit;
         }
 
@@ -122,6 +122,10 @@
             margin-bottom: 2rem;
             gap: 0.5rem;                /* reduced gap for tight screens */
             flex-wrap: nowrap;           /* force single line */
+            background: linear-gradient(135deg, #FF1F66 0%, #E91E8C 100%);
+            padding: 1rem;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 12px rgba(255,31,102,0.3);
         }
 
         .pqk-brand {
@@ -135,13 +139,13 @@
         .pqk-brand-icon {
             background-color: var(--header-icon-bg);
             color: var(--header-icon-text);
-            width: 48px;
-            height: 48px;
-            border-radius: 20px;
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             font-weight: 700;
             box-shadow: 0 6px 0 var(--header-shadow);
             transition: transform 0.2s ease;
@@ -155,27 +159,29 @@
         }
 
         .pqk-brand-text h1 {
-            font-size: 1.9rem;
+            font-size: 1.8rem;
             font-weight: 700;
             line-height: 1.1;
-            color: var(--text-primary);
+            color: #FFFFFF;
             letter-spacing: -0.02em;
             white-space: nowrap;           /* keep title on one line */
             overflow: hidden;
             text-overflow: ellipsis;       /* gracefully truncate if too long */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
         .pqk-brand-text span {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            color: var(--accent-orange);
-            background-color: var(--accent-light);
-            padding: 0.2rem 0.9rem;
+            color: #FFFFFF;
+            background-color: #FFD700;
+            padding: 0.3rem 0.8rem;
             border-radius: 40px;
             display: inline-block;
             margin-top: 4px;
-            border: 2px solid var(--text-primary);
+            border: 2px solid #FFFFFF;
             white-space: nowrap;           /* keep span on one line */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         /* header actions: theme toggle + hamburger */
@@ -187,40 +193,40 @@
         }
 
         .pqk-theme-btn {
-            background: var(--menu-btn-bg);
-            border: 4px solid var(--menu-btn-bg);
-            color: var(--menu-btn-text);
-            width: 62px;
-            height: 62px;
-            border-radius: 30px;
+            background: #FFFFFF;
+            border: 3px solid #FFFFFF;
+            color: #FF1F66;
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 1.8rem;
             cursor: pointer;
-            box-shadow: 0 7px 0 var(--header-shadow);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
             transition: all 0.1s ease;
             flex-shrink: 0;
         }
 
         .pqk-theme-btn:active {
-            transform: translateY(5px);
-            box-shadow: 0 2px 0 var(--header-shadow);
+            transform: translateY(2px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
         }
 
         .pqk-menu-btn {
-            background: var(--menu-btn-bg);
-            border: 4px solid var(--menu-btn-bg);
-            color: var(--menu-btn-text);
-            width: 62px;
-            height: 62px;
-            border-radius: 30px;
+            background: #FFFFFF;
+            border: 3px solid #FFFFFF;
+            color: #FF1F66;
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.2rem;
+            font-size: 2rem;
             cursor: pointer;
-            box-shadow: 0 7px 0 var(--header-shadow);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
             transition: all 0.1s ease;
             flex-shrink: 0;
         }
@@ -273,24 +279,24 @@
 
         .sidebar-close {
             align-self: flex-end;
-            background: var(--menu-btn-bg);
-            color: var(--menu-btn-text);
+            background: #FFD700;
+            color: #FF1F66;
             width: 44px;
             height: 44px;
-            border-radius: 22px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.8rem;
-            border: 3px solid var(--sidebar-border);
+            border: 3px solid #FFFFFF;
             cursor: pointer;
-            box-shadow: 0 4px 0 var(--header-shadow);
+            box-shadow: 0 4px 0 #FFC700;
             transition: 0.1s;
         }
 
         .sidebar-close:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px 0 var(--header-shadow);
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #FFC700;
         }
 
         .sidebar nav {
@@ -300,15 +306,15 @@
         }
 
         .sidebar nav a {
-            background-color: var(--sidebar-link-bg);
-            color: var(--text-primary);
+            background-color: #FFD700;
+            color: #FF1F66;
             text-decoration: none;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 700;
             padding: 1rem 1.2rem;
-            border-radius: 50px;
-            border: 3px solid var(--sidebar-border);
-            box-shadow: 0 5px 0 var(--sidebar-border);
+            border-radius: 14px;
+            border: 3px solid #FFFFFF;
+            box-shadow: 0 4px 0 #FFC700;
             transition: all 0.1s;
             display: flex;
             align-items: center;
@@ -316,13 +322,13 @@
         }
 
         .sidebar nav a i {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             width: 2rem;
         }
 
         .sidebar nav a:active {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 var(--sidebar-border);
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #FFC700;
         }
 
         /* ---------- CATEGORY CHIPS ---------- */
@@ -336,14 +342,14 @@
         }
 
         .pqk-chip {
-            background-color: var(--chip-bg);
-            border: 3px solid var(--chip-border);
-            color: var(--text-primary);
+            background-color: #FFFFFF;
+            border: 3px solid #FF1F66;
+            color: #FF1F66;
             font-weight: 700;
             font-size: 1.1rem;
             padding: 0.8rem 1.5rem;
-            border-radius: 60px;
-            box-shadow: 0 5px 0 var(--chip-shadow);
+            border-radius: 50px;
+            box-shadow: 0 4px 0 #FF1F66;
             cursor: pointer;
             white-space: nowrap;
             transition: all 0.1s ease;
@@ -355,15 +361,15 @@
         }
 
         .pqk-chip:active {
-            transform: translateY(4px);
-            box-shadow: 0 1px 0 var(--chip-shadow);
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #FF1F66;
         }
 
         .pqk-chip--active {
-            background-color: var(--chip-active-bg);
-            color: var(--chip-active-text);
-            border-color: var(--chip-border);
-            box-shadow: 0 5px 0 var(--chip-shadow);
+            background-color: #FF1F66;
+            color: #FFFFFF;
+            border-color: #FF1F66;
+            box-shadow: 0 4px 0 #C41551;
         }
 
         /* ---------- GAME GRID (full width) ---------- */
@@ -375,10 +381,10 @@
         }
 
         .pqk-game {
-            background-color: var(--card-bg);
-            border: 4px solid var(--card-border);
-            border-radius: 32px;
-            box-shadow: 0 10px 0 var(--card-shadow);
+            background-color: #FFFFFF;
+            border: 4px solid #FF1F66;
+            border-radius: 20px;
+            box-shadow: 0 8px 0 rgba(255,31,102,0.2), 0 4px 12px rgba(255,31,102,0.15);
             overflow: hidden;
             transition: all 0.15s ease;
             display: flex;
@@ -386,8 +392,8 @@
         }
 
         .pqk-game:hover {
-            transform: scale(1.01) translateY(-4px);
-            box-shadow: 0 14px 0 var(--card-shadow);
+            transform: scale(1.02) translateY(-4px);
+            box-shadow: 0 12px 0 rgba(255,31,102,0.25), 0 6px 16px rgba(255,31,102,0.2);
         }
 
         /* game picture area — solid background with icon */
@@ -403,11 +409,11 @@
         }
 
         /* per‑category picture backgrounds (solid) */
-        .pqk-game[data-category="puzzle"] .pqk-game-picture { background-color: #C7E9FF; }
-        .pqk-game[data-category="coloring"] .pqk-game-picture { background-color: #FFCFB6; }
-        .pqk-game[data-category="brain"] .pqk-game-picture { background-color: #C3E6CB; }
-        .pqk-game[data-category="memory"] .pqk-game-picture { background-color: #DCD0FF; }
-        .pqk-game[data-category="logic"] .pqk-game-picture { background-color: #FBC8D5; }
+        .pqk-game[data-category="puzzle"] .pqk-game-picture { background: linear-gradient(135deg, #87CEEB 0%, #B0E0E6 100%); }
+        .pqk-game[data-category="coloring"] .pqk-game-picture { background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 100%); }
+        .pqk-game[data-category="brain"] .pqk-game-picture { background: linear-gradient(135deg, #98D98E 0%, #7ED321 100%); }
+        .pqk-game[data-category="memory"] .pqk-game-picture { background: linear-gradient(135deg, #DDA0DD 0%, #EE82EE 100%); }
+        .pqk-game[data-category="logic"] .pqk-game-picture { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); }
 
         .pqk-game-content {
             padding: 1.2rem 1.2rem 1.4rem;
@@ -423,15 +429,16 @@
         }
 
         .pqk-cat-tag {
-            background-color: var(--tag-bg);
-            border: 2px solid var(--tag-border);
-            border-radius: 40px;
-            padding: 0.3rem 1rem;
+            background-color: #FF1F66;
+            border: 2px solid #FF1F66;
+            color: #FFFFFF;
+            border-radius: 30px;
+            padding: 0.4rem 1rem;
             font-size: 0.9rem;
             font-weight: 700;
             display: inline-block;
             width: fit-content;
-            box-shadow: 0 3px 0 var(--tag-border);
+            box-shadow: 0 2px 0 #C41551;
         }
 
         .pqk-cat-tag i {
@@ -453,25 +460,25 @@
         }
 
         .pqk-play {
-            background-color: var(--play-bg);
-            color: var(--play-text);
-            border: 3px solid var(--play-bg);
-            border-radius: 60px;
+            background-color: #FF1F66;
+            color: #FFFFFF;
+            border: 3px solid #FF1F66;
+            border-radius: 50px;
             padding: 0.7rem 1.5rem;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1rem;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            box-shadow: 0 5px 0 var(--play-shadow);
+            box-shadow: 0 4px 0 #C41551;
             transition: 0.1s;
             cursor: pointer;
         }
 
         .pqk-play:active {
-            transform: translateY(4px);
-            box-shadow: 0 1px 0 var(--play-shadow);
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #C41551;
         }
 
         .pqk-play i {
@@ -481,11 +488,11 @@
         .pqk-deco {
             font-size: 1rem;
             font-weight: 600;
-            color: var(--text-primary);
-            background: var(--tag-bg);
+            color: #FF1F66;
+            background: #FFE082;
             padding: 0.3rem 0.9rem;
-            border-radius: 30px;
-            border: 2px solid var(--tag-border);
+            border-radius: 20px;
+            border: 2px solid #FFC107;
         }
 
         .pqk-deco i {
@@ -495,14 +502,14 @@
         /* footer note */
         .pqk-footer-note {
             text-align: center;
-            color: var(--footer-text);
+            color: #FFFFFF;
             font-weight: 600;
-            background-color: var(--footer-bg);
-            border: 3px solid var(--footer-border);
-            border-radius: 60px;
+            background: linear-gradient(135deg, #FF1F66 0%, #E91E8C 100%);
+            border: 3px solid #FFFFFF;
+            border-radius: 50px;
             padding: 0.9rem 1.5rem;
             margin-top: 2rem;
-            box-shadow: 0 6px 0 var(--footer-border);
+            box-shadow: 0 6px 0 #C41551, 0 4px 12px rgba(255,31,102,0.2);
         }
 
         .pqk-footer-note i {
