@@ -125,7 +125,7 @@
             justify-content: space-between;
             margin: 0 -1.2rem 2rem -1.2rem;
             gap: 0.5rem;                /* reduced gap for tight screens */
-            flex-wrap: nowrap;           /* force single line */
+            flex-wrap: wrap;
             background: linear-gradient(135deg, #FF1F66 0%, #E91E8C 100%);
             padding: 1rem 1.2rem;
             border-radius: 0 0 20px 20px;
@@ -133,11 +133,18 @@
             width: calc(100% + 2.4rem);
         }
 
+        @media (min-width: 901px) {
+            .pqk-header {
+                flex-wrap: nowrap;
+                padding: 0.8rem 1.2rem;
+            }
+        }
+
         .pqk-brand {
             display: flex;
             align-items: center;
             gap: 0.6rem;
-            flex: 1 1 auto;              /* allow shrinking */
+            flex: 0 0 auto;              /* don't shrink, don't grow */
             min-width: 0;                 /* enable flex shrink */
         }
 
@@ -189,8 +196,59 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
-        /* header actions: theme toggle + hamburger */
-        .pqk-actions {
+        /* header categories (only visible on large screens) */
+        .pqk-header-categories {
+            display: none;
+            gap: 0;
+        }
+
+        @media (min-width: 901px) {
+            .pqk-header-categories {
+                display: flex;
+                flex: 1;
+                gap: 0;
+                justify-content: center;
+                margin: 0 1rem;
+            }
+        }
+
+        .pqk-header-categories .pqk-chip {
+            flex: 1;
+            max-width: 130px;
+            border-radius: 0;
+            border: 1px solid rgba(255,255,255,0.3);
+            background-color: transparent;
+            color: #FFFFFF;
+            font-size: 1rem;
+            padding: 0.6rem 0.8rem;
+            box-shadow: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .pqk-header-categories .pqk-chip:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .pqk-header-categories .pqk-chip:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+
+        .pqk-header-categories .pqk-chip:hover {
+            background-color: rgba(255,255,255,0.2);
+            transform: none;
+        }
+
+        .pqk-header-categories .pqk-chip--active {
+            background-color: #FFD700;
+            color: #FF1F66;
+            border-color: #FFD700;
+            box-shadow: none;
+        }
+
+        .pqk-header-categories .pqk-chip i {
+            display: none;
+        }
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -336,7 +394,7 @@
             box-shadow: 0 2px 0 #FFC700;
         }
 
-        /* ---------- CATEGORY CHIPS ---------- */
+        /* hidden on large screens since categories are in header */
         .pqk-categories {
             display: flex;
             gap: 0.8rem;
@@ -344,6 +402,12 @@
             padding: 0.5rem 0 1.2rem;
             margin-bottom: 1rem;
             -webkit-overflow-scrolling: touch;
+        }
+
+        @media (min-width: 901px) {
+            .pqk-categories {
+                display: none;
+            }
         }
 
         .pqk-chip {
@@ -596,6 +660,15 @@
                     <span>play & learn</span>
                 </div>
             </div>
+            <!-- Categories on large screens -->
+            <nav class="pqk-header-categories" aria-label="Game categories">
+                <button class="pqk-chip pqk-chip--active" data-filter="all" type="button">All games</button>
+                <button class="pqk-chip" data-filter="puzzle" type="button">Puzzle</button>
+                <button class="pqk-chip" data-filter="coloring" type="button">Coloring</button>
+                <button class="pqk-chip" data-filter="brain" type="button">Brainstorm</button>
+                <button class="pqk-chip" data-filter="memory" type="button">Memory</button>
+                <button class="pqk-chip" data-filter="logic" type="button">Logic & math</button>
+            </nav>
             <div class="pqk-actions">
                 <div class="pqk-theme-btn" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-sun" id="themeIcon"></i>
