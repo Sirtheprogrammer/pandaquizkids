@@ -68,7 +68,7 @@ body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
 .fence-rail{position:absolute;left:0;right:0;height:8px;background:linear-gradient(#D4B07A,#B08040);border-radius:4px;}
 
 /* ══ MASCOT ══ */
-#mascot-wrap{position:absolute;left:clamp(8px,2vw,40px);top:50%;transform:translateY(-50%);z-index:10;width:clamp(160px,22vw,280px);}
+#mascot-wrap{position:absolute;left:clamp(52px,3vw,80px);bottom:62px;z-index:10;width:clamp(250px,40vw,700px);}
 #mascot{width:100%;filter:drop-shadow(3px 6px 10px rgba(0,0,0,.3));animation:idleBounce 2.2s ease-in-out infinite;}
 @keyframes idleBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
 #mascot.cheer{animation:mascotRise 1.5s cubic-bezier(0.34,1.2,0.64,1) forwards;}
@@ -104,7 +104,7 @@ body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
   width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:12px solid #FF9800;}
 #cbubble.show{transform:translateX(-50%) scale(1);}
 @media(max-width:599px){
-  #mascot-wrap{left:50%;transform:translate(-50%,-50%);top:clamp(60px,15vh,120px);width:clamp(120px,30vw,180px);}
+  #mascot-wrap{left:8px;bottom:clamp(55px,14vw,80px);width:clamp(200px,45vw,300px);}
   #mascot{width:100%;}
 }
 @media(max-width:380px){#mascot-wrap{display:none;}}
