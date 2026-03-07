@@ -68,8 +68,8 @@ body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
 .fence-rail{position:absolute;left:0;right:0;height:8px;background:linear-gradient(#D4B07A,#B08040);border-radius:4px;}
 
 /* ══ MASCOT ══ */
-#mascot-wrap{position:absolute;left:52px;bottom:62px;z-index:10;width:115px;}
-#mascot{width:115px;filter:drop-shadow(3px 6px 10px rgba(0,0,0,.3));animation:idleBounce 2.2s ease-in-out infinite;}
+#mascot-wrap{position:absolute;left:clamp(52px,3vw,80px);bottom:62px;z-index:10;width:clamp(250px,40vw,700px);}
+#mascot{width:100%;filter:drop-shadow(3px 6px 10px rgba(0,0,0,.3));animation:idleBounce 2.2s ease-in-out infinite;}
 @keyframes idleBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
 #mascot.cheer{animation:mascotRise 1.5s cubic-bezier(0.34,1.2,0.64,1) forwards;}
 @keyframes mascotRise{
@@ -92,7 +92,7 @@ body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
   width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:12px solid #FF9800;}
 #cbubble.show{transform:translateX(-50%) scale(1);}
 @media(max-width:599px){
-  #mascot-wrap{left:8px;bottom:clamp(55px,14vw,80px);width:clamp(58px,15vw,88px);}
+  #mascot-wrap{left:8px;bottom:clamp(55px,14vw,80px);width:clamp(100px,25vw,150px);}
   #mascot{width:100%;}
 }
 @media(max-width:380px){#mascot-wrap{display:none;}}
@@ -265,37 +265,7 @@ body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
 <!-- MASCOT -->
 <div id="mascot-wrap">
   <div id="cbubble">Awesome!</div>
-  <svg id="mascot" viewBox="0 0 110 150">
-    <ellipse cx="55" cy="115" rx="28" ry="30" fill="#F4A261"/>
-    <path d="M28 110 Q55 130 82 110 L82 145 Q55 155 28 145Z" fill="#E76F51"/>
-    <rect x="36" y="138" width="16" height="14" rx="4" fill="#457B9D"/>
-    <rect x="58" y="138" width="16" height="14" rx="4" fill="#457B9D"/>
-    <ellipse cx="44" cy="152" rx="9" ry="5" fill="#F4A261"/>
-    <ellipse cx="66" cy="152" rx="9" ry="5" fill="#F4A261"/>
-    <ellipse cx="22" cy="118" rx="8" ry="16" fill="#F4A261" transform="rotate(15,22,118)"/>
-    <ellipse cx="88" cy="118" rx="8" ry="16" fill="#F4A261" transform="rotate(-15,88,118)"/>
-    <ellipse cx="55" cy="72" rx="34" ry="32" fill="#FDDCB5"/>
-    <polygon points="22,46 14,20 38,40" fill="#FDDCB5"/>
-    <polygon points="25,43 19,25 36,39" fill="#FF9FB0"/>
-    <polygon points="88,46 96,20 72,40" fill="#FDDCB5"/>
-    <polygon points="85,43 91,25 74,39" fill="#FF9FB0"/>
-    <ellipse cx="55" cy="75" rx="22" ry="20" fill="#FFF0E0" opacity=".7"/>
-    <ellipse cx="42" cy="66" rx="10" ry="11" fill="white"/>
-    <ellipse cx="68" cy="66" rx="10" ry="11" fill="white"/>
-    <ellipse cx="43" cy="67" rx="7" ry="8" fill="#4A2912"/>
-    <ellipse cx="69" cy="67" rx="7" ry="8" fill="#4A2912"/>
-    <circle cx="45" cy="64" r="2.5" fill="white"/>
-    <circle cx="71" cy="64" r="2.5" fill="white"/>
-    <ellipse cx="55" cy="80" rx="5" ry="4" fill="#FF8FAB"/>
-    <path d="M46 86 Q55 95 64 86" stroke="#C46A6A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <line x1="20" y1="79" x2="46" y2="81" stroke="#888" stroke-width="1.5"/>
-    <line x1="20" y1="85" x2="46" y2="84" stroke="#888" stroke-width="1.5"/>
-    <line x1="64" y1="81" x2="90" y2="79" stroke="#888" stroke-width="1.5"/>
-    <line x1="64" y1="84" x2="90" y2="85" stroke="#888" stroke-width="1.5"/>
-    <path d="M28 135 Q0 120 10 100 Q20 82 14 72" stroke="#F4A261" stroke-width="9" fill="none" stroke-linecap="round"/>
-    <ellipse cx="32" cy="78" rx="8" ry="5" fill="#FFB3C1" opacity=".6"/>
-    <ellipse cx="78" cy="78" rx="8" ry="5" fill="#FFB3C1" opacity=".6"/>
-  </svg>
+  <img id="mascot" src="/images/cat.png" alt="Game Mascot Cat" style="width:100%;height:auto;object-fit:contain;pointer-events:none;">
 </div>
 
 <!-- HUD -->

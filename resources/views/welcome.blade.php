@@ -58,21 +58,21 @@
             --bg-body: #1A1A1A;           /* very dark */
             --text-primary: #FFFFFF;       /* white */
             --text-secondary: #E0E0E0;
-            --accent-orange: #FF6B35;
+            --accent-orange: #FF8C5A;     /* lighter orange for visibility */
             --accent-light: #2A2A2A;
             --accent-yellow: #FFD700;
             --accent-panel: #2A2A2A;
             --header-icon-bg: #FF1F66;
             --header-icon-text: #FFFFFF;
             --header-shadow: #C41551;
-            --chip-bg: #2A2A2A;
+            --chip-bg: #333333;            /* slightly lighter dark */
             --chip-border: #FF1F66;
             --chip-shadow: #FF1F66;
             --chip-active-bg: #FF1F66;
             --chip-active-text: #FFFFFF;
             --card-bg: #2A2A2A;
-            --card-border: #FF1F66;
-            --card-shadow: #FF1F66;
+            --card-border: #444444;        /* lighter border for dark mode */
+            --card-shadow: #000000;
             --tag-bg: #FF1F66;
             --tag-border: #FFFFFF;
             --play-bg: #FF1F66;
@@ -85,10 +85,26 @@
             --footer-bg: #FF1F66;
             --footer-border: #FFFFFF;
             --footer-text: #FFFFFF;
-            --menu-btn-bg: #FFFFFF;
-            --menu-btn-text: #FF1F66;
+            --menu-btn-bg: #333333;        /* dark button background */
+            --menu-btn-text: #FFD700;      /* golden yellow text */
             --overlay-bg: rgba(0,0,0,0.7);
             --icon-color: inherit;
+        }
+
+        /* Dark theme adjustments for buttons */
+        .dark-theme .pqk-theme-btn,
+        .dark-theme .pqk-menu-btn {
+            background: #333333;
+            border: 3px solid #444444;
+            color: #FFD700;
+        }
+
+        .dark-theme .pqk-game-title {
+            color: #FFFFFF;
+        }
+
+        .dark-theme .pqk-game-text {
+            color: #E0E0E0;
         }
 
         /* apply variables */
@@ -249,6 +265,9 @@
         .pqk-header-categories .pqk-chip i {
             display: none;
         }
+
+        /* header actions: theme toggle + hamburger */
+        .pqk-actions {
             display: flex;
             align-items: center;
             gap: 0.5rem;
