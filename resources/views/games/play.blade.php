@@ -69,8 +69,8 @@ body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
 .fence-rail{position:absolute;left:0;right:0;height:8px;background:linear-gradient(#D4B07A,#B08040);border-radius:4px;}
 
 /* ══ MASCOT ══ */
-#mascot-container{position:absolute;left:clamp(52px,3vw,80px);bottom:62px;z-index:10;width:clamp(250px,40vw,700px);height:clamp(250px,40vw,700px);display:flex;align-items:center;justify-content:center;}
-#mascot-canvas{display:block !important;width:100% !important;height:100% !important;}
+#mascot-container{position:absolute;left:clamp(52px,3vw,80px);bottom:62px;z-index:10;width:clamp(250px,40vw,700px);height:clamp(250px,40vw,700px);display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;}
+#mascot-canvas{display:block !important;width:100% !important;height:100% !important;background:transparent !important;}
 #cbubble{position:absolute;bottom:110%;left:50%;transform:translateX(-50%) scale(0);
   background:linear-gradient(135deg,#FFD700,#FF9800);border:3px solid white;border-radius:20px;
   padding:5px 14px;font-size:clamp(12px,3vw,15px);color:white;white-space:nowrap;
@@ -1034,11 +1034,12 @@ function init3DCat(){
     if(w===0||h===0){console.warn('Container has no dimensions');return;}
     mascotScene=new THREE.Scene();mascotScene.background=new THREE.Color(0xffffff);mascotScene.background.setAlpha(0);
     mascotCamera=new THREE.PerspectiveCamera(60,w/h,0.1,1000);
-    mascotCamera.position.set(0,0,8);
-    mascotRenderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+    mascotCamera.position.set(0,0,12);
+    mascotRenderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,preserveDrawingBuffer:true});
     mascotRenderer.setSize(w,h);
     mascotRenderer.setClearColor(0xffffff,0);
     mascotRenderer.pixelRatio=Math.min(window.devicePixelRatio,2);
+    console.log('3D Cat: Canvas',w,'x',h,'| Renderer initialized');
     
     // Lighting
     const ambLight=new THREE.AmbientLight(0xffffff,0.8);mascotScene.add(ambLight);
@@ -1047,6 +1048,7 @@ function init3DCat(){
     
     mascotCat=createCatGeometry();mascotScene.add(mascotCat);
     mascot3D={scene:mascotScene,camera:mascotCamera,renderer:mascotRenderer,cat:mascotCat,time:0,animState:'idle'};
+    console.log('3D Cat: Geometry created and added to scene');
     window.addEventListener('resize',()=>resizeCatCanvas());
     animateCat();
   }catch(e){console.error('3D cat initialization failed:',e);}
@@ -1094,7 +1096,8 @@ function createCatGeometry(){
   const mouth=new THREE.Mesh(mouthG,mouthM);mouth.position.set(0,-1.2,2.6);mouth.rotation.x=Math.PI;group.add(mouth);
   
   // Body
-  const bodyG=new THREE.CapsuleGeometry(1.8,3,16,32);const bodyM=new THREE.MeshPhongMaterial({color:skin});
+  const bodyG=new THREE.CylinderGeometry(1.8,1.5,3,32);
+  const bodyM=new THREE.MeshPhongMaterial({color:skin});
   const body=new THREE.Mesh(bodyG,bodyM);body.position.set(0,-3.5,0);group.add(body);
   
   // Tail
@@ -1104,8 +1107,7 @@ function createCatGeometry(){
   group.scale.set(1,1,1);return group;
 }
 function animateCat(){
-  requestAnimationFrame(animateCat);
-  if(!mascot3D)return;
+  if(!mascot3D)return;requestAnimationFrame(animateCat);
   mascot3D.time+=0.016;
   const cat=mascot3D.cat;
   const s=mascot3D.animState;
@@ -1117,7 +1119,7 @@ function animateCat(){
   else if(s==='hide'){cat.scale.set(0.85+Math.sin(mascot3D.time*3)*0.05,0.85+Math.sin(mascot3D.time*3)*0.05,0.85);cat.rotation.z=Math.sin(mascot3D.time*2)*0.2;}
   else if(s==='impressed'){cat.scale.set(1.15+Math.sin(mascot3D.time*5)*0.1,1.15+Math.sin(mascot3D.time*5)*0.1,1.15);}
   
-  mascotRenderer.render(mascotScene,mascotCamera);
+  try{mascotRenderer.render(mascotScene,mascotCamera);}catch(e){console.error('Render error:',e);}
 }
 function setMascotAnimation(state,duration=2200){
   if(!mascot3D)return;mascot3D.animState=state;mascot3D.time=0;
