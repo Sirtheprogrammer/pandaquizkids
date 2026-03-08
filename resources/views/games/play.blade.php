@@ -1006,7 +1006,7 @@ function buildFence(){
 window.addEventListener('load',()=>{
   buildClouds();buildTrees();buildFlowers();buildFence();
   levels=buildLevels();
-  init3DCat();
+  try{init3DCat();}catch(e){console.error('3D cat init error:',e);}
   setTimeout(()=>SFX.load(),1200);
   setTimeout(()=>{
     const ls=document.getElementById('loading-screen');
@@ -1014,7 +1014,6 @@ window.addEventListener('load',()=>{
     setTimeout(()=>{
       ls.style.display='none';
       load();
-      // auto-start music after first user interaction
     },900);
   },3400);
 });
@@ -1024,28 +1023,33 @@ window.addEventListener('load',()=>{
 ══════════════════════════════════════════ */
 let mascot3D=null,mascotScene,mascotCamera,mascotRenderer,mascotCat;
 function init3DCat(){
-  if(mascot3D)return;
-  const container=document.getElementById('mascot-container');
-  if(!container)return;const canvas=document.getElementById('mascot-canvas');
-  const w=container.clientWidth,h=container.clientHeight;
-  if(w===0||h===0)return;
-  mascotScene=new THREE.Scene();mascotScene.background=new THREE.Color(0xffffff);mascotScene.background.setAlpha(0);
-  mascotCamera=new THREE.PerspectiveCamera(60,w/h,0.1,1000);
-  mascotCamera.position.set(0,0,8);
-  mascotRenderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
-  mascotRenderer.setSize(w,h);
-  mascotRenderer.setClearColor(0xffffff,0);
-  mascotRenderer.pixelRatio=Math.min(window.devicePixelRatio,2);
-  
-  // Lighting
-  const ambLight=new THREE.AmbientLight(0xffffff,0.8);mascotScene.add(ambLight);
-  const dirLight=new THREE.DirectionalLight(0xffffff,0.6);dirLight.position.set(5,8,10);mascotScene.add(dirLight);
-  const backLight=new THREE.DirectionalLight(0xff9999,0.3);backLight.position.set(-5,-3,-10);mascotScene.add(backLight);
-  
-  mascotCat=createCatGeometry();mascotScene.add(mascotCat);
-  mascot3D={scene:mascotScene,camera:mascotCamera,renderer:mascotRenderer,cat:mascotCat,time:0,animState:'idle'};
-  window.addEventListener('resize',()=>resizeCatCanvas());
-  animateCat();
+  try{
+    if(mascot3D)return;
+    const container=document.getElementById('mascot-container');
+    if(!container){console.warn('No mascot container found');return;}
+    const canvas=document.getElementById('mascot-canvas');
+    if(!canvas){console.warn('No mascot canvas found');return;}
+    if(typeof THREE==='undefined'){console.warn('Three.js not loaded');return;}
+    const w=container.clientWidth,h=container.clientHeight;
+    if(w===0||h===0){console.warn('Container has no dimensions');return;}
+    mascotScene=new THREE.Scene();mascotScene.background=new THREE.Color(0xffffff);mascotScene.background.setAlpha(0);
+    mascotCamera=new THREE.PerspectiveCamera(60,w/h,0.1,1000);
+    mascotCamera.position.set(0,0,8);
+    mascotRenderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+    mascotRenderer.setSize(w,h);
+    mascotRenderer.setClearColor(0xffffff,0);
+    mascotRenderer.pixelRatio=Math.min(window.devicePixelRatio,2);
+    
+    // Lighting
+    const ambLight=new THREE.AmbientLight(0xffffff,0.8);mascotScene.add(ambLight);
+    const dirLight=new THREE.DirectionalLight(0xffffff,0.6);dirLight.position.set(5,8,10);mascotScene.add(dirLight);
+    const backLight=new THREE.DirectionalLight(0xff9999,0.3);backLight.position.set(-5,-3,-10);mascotScene.add(backLight);
+    
+    mascotCat=createCatGeometry();mascotScene.add(mascotCat);
+    mascot3D={scene:mascotScene,camera:mascotCamera,renderer:mascotRenderer,cat:mascotCat,time:0,animState:'idle'};
+    window.addEventListener('resize',()=>resizeCatCanvas());
+    animateCat();
+  }catch(e){console.error('3D cat initialization failed:',e);}
 }
 function createCatGeometry(){
   const group=new THREE.Group();
