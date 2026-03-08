@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Color Quest!</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;900&display=swap');
 
@@ -68,33 +69,8 @@ body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
 .fence-rail{position:absolute;left:0;right:0;height:8px;background:linear-gradient(#D4B07A,#B08040);border-radius:4px;}
 
 /* ══ MASCOT ══ */
-#mascot-wrap{position:absolute;left:clamp(52px,3vw,80px);bottom:62px;z-index:10;width:clamp(250px,40vw,700px);}
-#mascot{width:100%;filter:drop-shadow(3px 6px 10px rgba(0,0,0,.3));animation:idleBounce 2.2s ease-in-out infinite;}
-@keyframes idleBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-#mascot.cheer{animation:mascotRise 1.5s cubic-bezier(0.34,1.2,0.64,1) forwards;}
-@keyframes mascotRise{
-  0%  {transform:translateY(0) scale(1) rotate(0deg);}
-  20% {transform:translateY(-75px) scale(1.18) rotate(-14deg);}
-  40% {transform:translateY(-108px) scale(1.24) rotate(17deg);}
-  56% {transform:translateY(-90px) scale(1.18) rotate(-9deg);}
-  70% {transform:translateY(-55px) scale(1.12) rotate(6deg);}
-  85% {transform:translateY(-22px) scale(1.06) rotate(-3deg);}
-  100%{transform:translateY(0) scale(1) rotate(0deg);}
-}
-#mascot.sad{animation:mascotSad .6s ease both;}
-@keyframes mascotSad{0%,100%{transform:translateX(0);}25%{transform:translateX(-14px) rotate(-5deg);}75%{transform:translateX(14px) rotate(5deg);}}
-#mascot.thinking{animation:mascotThink 2s ease-in-out infinite;}
-@keyframes mascotThink{0%{transform:translateX(0) rotate(0deg);}25%{transform:translateX(8px) rotate(4deg);}50%{transform:translateX(0) rotate(0deg);}75%{transform:translateX(-8px) rotate(-4deg);}100%{transform:translateX(0) rotate(0deg);}}
-#mascot.dance{animation:mascotDance 1.4s cubic-bezier(0.34,1.2,0.64,1) forwards;}
-@keyframes mascotDance{0%{transform:translateY(0) scale(1) rotate(0deg);}15%{transform:translateY(-35px) scale(1.08) rotate(-8deg);}30%{transform:translateY(-50px) scale(1.12) rotate(12deg);}45%{transform:translateY(-35px) scale(1.08) rotate(-8deg);}60%{transform:translateY(0) scale(1) rotate(0deg);}75%{transform:translateY(-28px) scale(1.06) rotate(6deg);}100%{transform:translateY(0) scale(1) rotate(0deg);}}
-#mascot.hide{animation:mascotHide 1.2s ease both;}
-@keyframes mascotHide{0%,100%{transform:scale(1) rotate(0deg);}50%{transform:scale(0.85) rotate(-15deg);}}
-#mascot.nod{animation:mascotNod 1s ease-in-out forwards;}
-@keyframes mascotNod{0%{transform:translateY(0) rotate(0deg);}25%{transform:translateY(-12px) rotate(-8deg);}50%{transform:translateY(0) rotate(2deg);}75%{transform:translateY(-10px) rotate(-6deg);}100%{transform:translateY(0) rotate(0deg);}}
-#mascot.wave{animation:mascotWave 1.2s ease-in-out forwards;}
-@keyframes mascotWave{0%{transform:translateX(0) scale(1);}20%{transform:translateX(15px) scale(1) skewX(8deg);}40%{transform:translateX(20px) scale(1.05) skewX(-8deg);}60%{transform:translateX(15px) scale(1) skewX(6deg);}80%{transform:translateX(10px) scale(0.98) skewX(-4deg);}100%{transform:translateX(0) scale(1) skewX(0deg);}}
-#mascot.impressed{animation:mascotImpressed 1.6s cubic-bezier(0.34,1.2,0.64,1) forwards;}
-@keyframes mascotImpressed{0%{transform:scale(1) rotate(0deg);}20%{transform:scale(1.15) rotate(0deg);}40%{transform:scale(1.2) rotate(4deg);}60%{transform:scale(1.18) rotate(-3deg);}100%{transform:scale(1) rotate(0deg);}}
+#mascot-container{position:absolute;left:clamp(52px,3vw,80px);bottom:62px;z-index:10;width:clamp(250px,40vw,700px);height:clamp(250px,40vw,700px);display:flex;align-items:center;justify-content:center;}
+#mascot-canvas{display:block !important;width:100% !important;height:100% !important;}
 #cbubble{position:absolute;bottom:110%;left:50%;transform:translateX(-50%) scale(0);
   background:linear-gradient(135deg,#FFD700,#FF9800);border:3px solid white;border-radius:20px;
   padding:5px 14px;font-size:clamp(12px,3vw,15px);color:white;white-space:nowrap;
@@ -104,10 +80,9 @@ body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
   width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:12px solid #FF9800;}
 #cbubble.show{transform:translateX(-50%) scale(1);}
 @media(max-width:599px){
-  #mascot-wrap{left:8px;bottom:clamp(55px,14vw,80px);width:clamp(200px,45vw,300px);}
-  #mascot{width:100%;}
+  #mascot-container{left:8px;bottom:clamp(55px,14vw,80px);width:clamp(200px,45vw,300px);height:clamp(200px,45vw,300px);}
 }
-@media(max-width:380px){#mascot-wrap{display:none;}}
+@media(max-width:380px){#mascot-container{display:none;}}
 
 /* ══ HUD ══ */
 #hud{position:fixed;top:0;left:0;right:0;z-index:30;
@@ -279,9 +254,9 @@ body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
 </svg>
 
 <!-- MASCOT -->
-<div id="mascot-wrap">
+<div id="mascot-container">
+  <canvas id="mascot-canvas"></canvas>
   <div id="cbubble">Awesome!</div>
-  <img id="mascot" src="/images/cat.png" alt="Game Mascot Cat" style="width:100%;height:auto;object-fit:contain;pointer-events:none;">
 </div>
 
 <!-- HUD -->
@@ -837,12 +812,12 @@ function addBadge(card,ok){
    MASCOT CHEER
 ══════════════════════════════════════════ */
 function basicCheer(){
-  const m=document.getElementById('mascot');
+  setMascotAnimation('cheer',2200);
   const b=document.getElementById('cbubble');
   SFX.winSound();
   b.textContent=REACTIONS.cheer[Math.floor(Math.random()*REACTIONS.cheer.length)];
-  m.className='cheer';b.classList.add('show');
-  setTimeout(()=>{m.className='';b.classList.remove('show');},2200);
+  b.classList.add('show');
+  setTimeout(()=>{b.classList.remove('show');},2200);
 }
 
 function cheerMascot(){
@@ -877,54 +852,54 @@ const REACTIONS={
 };
 
 function thinkingMascot(){
-  const m=document.getElementById('mascot');
+  setMascotAnimation('idle',2200);
   const b=document.getElementById('cbubble');
   b.textContent=REACTIONS.thinking[Math.floor(Math.random()*REACTIONS.thinking.length)];
-  m.className='thinking';b.classList.add('show');
-  setTimeout(()=>{m.className='';b.classList.remove('show');},2200);
+  b.classList.add('show');
+  setTimeout(()=>{b.classList.remove('show');},2200);
 }
 
 function danceMascot(){
-  const m=document.getElementById('mascot');
+  setMascotAnimation('dance',1600);
   const b=document.getElementById('cbubble');
   SFX.winSound();
   b.textContent=REACTIONS.dance[Math.floor(Math.random()*REACTIONS.dance.length)];
-  m.className='dance';b.classList.add('show');
-  setTimeout(()=>{m.className='';b.classList.remove('show');},1600);
+  b.classList.add('show');
+  setTimeout(()=>{b.classList.remove('show');},1600);
 }
 
 function hideMascot(){
-  const m=document.getElementById('mascot');
+  setMascotAnimation('hide',1400);
   const b=document.getElementById('cbubble');
   SFX.missSound();
   b.textContent=REACTIONS.hide[Math.floor(Math.random()*REACTIONS.hide.length)];
-  m.className='hide';b.classList.add('show');
-  setTimeout(()=>{m.className='';b.classList.remove('show');},1400);
+  b.classList.add('show');
+  setTimeout(()=>{b.classList.remove('show');},1400);
 }
 
 function nodMascot(){
-  const m=document.getElementById('mascot');
+  setMascotAnimation('idle',1200);
   const b=document.getElementById('cbubble');
   b.textContent=REACTIONS.nod[Math.floor(Math.random()*REACTIONS.nod.length)];
-  m.className='nod';b.classList.add('show');
-  setTimeout(()=>{m.className='';b.classList.remove('show');},1200);
+  b.classList.add('show');
+  setTimeout(()=>{b.classList.remove('show');},1200);
 }
 
 function waveMascot(){
-  const m=document.getElementById('mascot');
+  setMascotAnimation('idle',1400);
   const b=document.getElementById('cbubble');
   b.textContent=REACTIONS.wave[Math.floor(Math.random()*REACTIONS.wave.length)];
-  m.className='wave';b.classList.add('show');
-  setTimeout(()=>{m.className='';b.classList.remove('show');},1400);
+  b.classList.add('show');
+  setTimeout(()=>{b.classList.remove('show');},1400);
 }
 
 function impressedMascot(){
-  const m=document.getElementById('mascot');
+  setMascotAnimation('impressed',1800);
   const b=document.getElementById('cbubble');
   SFX.winSound();
   b.textContent=REACTIONS.impressed[Math.floor(Math.random()*REACTIONS.impressed.length)];
-  m.className='impressed';b.classList.add('show');
-  setTimeout(()=>{m.className='';b.classList.remove('show');},1800);
+  b.classList.add('show');
+  setTimeout(()=>{b.classList.remove('show');},1800);
 }
 
 /* ══════════════════════════════════════════
@@ -1031,6 +1006,7 @@ function buildFence(){
 window.addEventListener('load',()=>{
   buildClouds();buildTrees();buildFlowers();buildFence();
   levels=buildLevels();
+  init3DCat();
   setTimeout(()=>SFX.load(),1200);
   setTimeout(()=>{
     const ls=document.getElementById('loading-screen');
@@ -1043,9 +1019,116 @@ window.addEventListener('load',()=>{
   },3400);
 });
 
+/* ══════════════════════════════════════════
+   3D CAT MASCOT (Three.js)
+══════════════════════════════════════════ */
+let mascot3D=null,mascotScene,mascotCamera,mascotRenderer,mascotCat;
+function init3DCat(){
+  if(mascot3D)return;
+  const container=document.getElementById('mascot-container');
+  if(!container)return;const canvas=document.getElementById('mascot-canvas');
+  const w=container.clientWidth,h=container.clientHeight;
+  if(w===0||h===0)return;
+  mascotScene=new THREE.Scene();mascotScene.background=new THREE.Color(0xffffff);mascotScene.background.setAlpha(0);
+  mascotCamera=new THREE.PerspectiveCamera(60,w/h,0.1,1000);
+  mascotCamera.position.set(0,0,8);
+  mascotRenderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  mascotRenderer.setSize(w,h);
+  mascotRenderer.setClearColor(0xffffff,0);
+  mascotRenderer.pixelRatio=Math.min(window.devicePixelRatio,2);
+  
+  // Lighting
+  const ambLight=new THREE.AmbientLight(0xffffff,0.8);mascotScene.add(ambLight);
+  const dirLight=new THREE.DirectionalLight(0xffffff,0.6);dirLight.position.set(5,8,10);mascotScene.add(dirLight);
+  const backLight=new THREE.DirectionalLight(0xff9999,0.3);backLight.position.set(-5,-3,-10);mascotScene.add(backLight);
+  
+  mascotCat=createCatGeometry();mascotScene.add(mascotCat);
+  mascot3D={scene:mascotScene,camera:mascotCamera,renderer:mascotRenderer,cat:mascotCat,time:0,animState:'idle'};
+  window.addEventListener('resize',()=>resizeCatCanvas());
+  animateCat();
+}
+function createCatGeometry(){
+  const group=new THREE.Group();
+  const skin='#FF9966',eyes='#000000',nose='#FF6699',inner='#FFCCEE';
+  
+  // Head
+  const headG=new THREE.SphereGeometry(2.5,32,32);
+  const headM=new THREE.MeshPhongMaterial({color:skin,shininess:30});
+  const head=new THREE.Mesh(headG,headM);group.add(head);
+  
+  // Left Ear
+  const earL=new THREE.Group();
+  const earLG=new THREE.ConeGeometry(1.2,2.4,32);const earLM=new THREE.MeshPhongMaterial({color:skin});
+  const ear1L=new THREE.Mesh(earLG,earLM);ear1L.position.set(-1.5,2.8,0);ear1L.rotation.z=-0.3;earL.add(ear1L);
+  const earIL=new THREE.SphereGeometry(0.5,16,16);const earIM=new THREE.MeshPhongMaterial({color:inner});
+  const ear2L=new THREE.Mesh(earIL,earIM);ear2L.position.set(-1.5,2.4,0.6);earL.add(ear2L);
+  group.add(earL);
+  
+  // Right Ear
+  const earR=new THREE.Group();
+  const earRG=new THREE.ConeGeometry(1.2,2.4,32);const earRM=new THREE.MeshPhongMaterial({color:skin});
+  const ear1R=new THREE.Mesh(earRG,earRM);ear1R.position.set(1.5,2.8,0);ear1R.rotation.z=0.3;earR.add(ear1R);
+  const ear2R=new THREE.Mesh(earIL,earIM);ear2R.position.set(1.5,2.4,0.6);earR.add(ear2R);
+  group.add(earR);
+  
+  // Eyes
+  const eyeG=new THREE.SphereGeometry(0.7,16,16);const eyeM=new THREE.MeshPhongMaterial({color:eyes});
+  const eyeL=new THREE.Mesh(eyeG,eyeM);eyeL.position.set(-1.1,1.2,2.2);group.add(eyeL);
+  const eyeR=new THREE.Mesh(eyeG,eyeM);eyeR.position.set(1.1,1.2,2.2);group.add(eyeR);
+  
+  // Pupils
+  const pupilG=new THREE.SphereGeometry(0.3,8,8);const pupilM=new THREE.MeshPhongMaterial({color:'#2196F3'});
+  const pupilL=new THREE.Mesh(pupilG,pupilM);pupilL.position.set(-1.1,1.2,2.7);pupilL.userData.isMascot=true;group.add(pupilL);
+  const pupilR=new THREE.Mesh(pupilG,pupilM);pupilR.position.set(1.1,1.2,2.7);pupilR.userData.isMascot=true;group.add(pupilR);
+  
+  // Nose
+  const noseG=new THREE.SphereGeometry(0.6,16,16);const noseM=new THREE.MeshPhongMaterial({color:nose});
+  const nose_=new THREE.Mesh(noseG,noseM);nose_.position.set(0,-0.5,2.8);group.add(nose_);
+  
+  // Mouth
+  const mouthG=new THREE.TorusGeometry(0.8,0.3,16,8,Math.PI);const mouthM=new THREE.MeshPhongMaterial({color:eyes});
+  const mouth=new THREE.Mesh(mouthG,mouthM);mouth.position.set(0,-1.2,2.6);mouth.rotation.x=Math.PI;group.add(mouth);
+  
+  // Body
+  const bodyG=new THREE.CapsuleGeometry(1.8,3,16,32);const bodyM=new THREE.MeshPhongMaterial({color:skin});
+  const body=new THREE.Mesh(bodyG,bodyM);body.position.set(0,-3.5,0);group.add(body);
+  
+  // Tail
+  const tailG=new THREE.ConeGeometry(0.8,4.5,16);const tailM=new THREE.MeshPhongMaterial({color:skin});
+  const tail=new THREE.Mesh(tailG,tailM);tail.position.set(2.2,-2.5,-1);tail.rotation.z=1.2;tail.userData.tail=true;group.add(tail);
+  
+  group.scale.set(1,1,1);return group;
+}
+function animateCat(){
+  requestAnimationFrame(animateCat);
+  if(!mascot3D)return;
+  mascot3D.time+=0.016;
+  const cat=mascot3D.cat;
+  const s=mascot3D.animState;
+  
+  // Idle bounce
+  if(s==='idle'){cat.position.y=Math.sin(mascot3D.time*2.5)*0.3;cat.rotation.z=Math.sin(mascot3D.time*1.5)*0.05;}
+  else if(s==='cheer'){cat.position.y=Math.sin(mascot3D.time*5)*0.6;cat.scale.set(1.1,1.1,1.1);}
+  else if(s==='dance'){cat.rotation.z=Math.sin(mascot3D.time*4)*0.3;cat.position.y=Math.abs(Math.sin(mascot3D.time*5))*0.8;}
+  else if(s==='hide'){cat.scale.set(0.85+Math.sin(mascot3D.time*3)*0.05,0.85+Math.sin(mascot3D.time*3)*0.05,0.85);cat.rotation.z=Math.sin(mascot3D.time*2)*0.2;}
+  else if(s==='impressed'){cat.scale.set(1.15+Math.sin(mascot3D.time*5)*0.1,1.15+Math.sin(mascot3D.time*5)*0.1,1.15);}
+  
+  mascotRenderer.render(mascotScene,mascotCamera);
+}
+function setMascotAnimation(state,duration=2200){
+  if(!mascot3D)return;mascot3D.animState=state;mascot3D.time=0;
+  setTimeout(()=>{if(mascot3D)mascot3D.animState='idle';},duration);
+}
+function resizeCatCanvas(){
+  const container=document.getElementById('mascot-container');
+  if(!container||!mascot3D)return;const w=container.clientWidth,h=container.clientHeight;
+  mascotCamera.aspect=w/h;mascotCamera.updateProjectionMatrix();mascotRenderer.setSize(w,h);
+}
+
 // Unlock audio + auto-start music on first tap/click
 let musicStarted=false;
 document.addEventListener('click',()=>{
+  if(!mascot3D)init3DCat();
   try{gAC().resume();}catch(e){}
   if(!musicStarted){
     musicStarted=true;
