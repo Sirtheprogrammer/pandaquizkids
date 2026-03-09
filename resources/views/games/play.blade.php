@@ -69,15 +69,29 @@ body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
 .fence-rail{position:absolute;left:0;right:0;height:8px;background:linear-gradient(#D4B07A,#B08040);border-radius:4px;}
 
 /* ══ MASCOT ══ */
-#mascot-container{position:absolute;left:clamp(52px,3vw,80px);bottom:62px;z-index:10;width:clamp(250px,40vw,700px);height:clamp(250px,40vw,700px);display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;}
-#mascot-video{display:block !important;width:100% !important;height:100% !important;background:transparent !important;object-fit:contain;image-rendering:crisp-edges;}
-#cbubble{position:absolute;bottom:110%;left:50%;transform:translateX(-50%) scale(0);
+#mascot-container{position:absolute;left:clamp(52px,3vw,80px);bottom:62px;z-index:10;width:clamp(250px,40vw,700px);height:clamp(250px,40vw,700px);display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.05);border-radius:20px;overflow:visible;perspective:1000px;}
+#mascot-video{display:block !important;width:100% !important;height:100% !important;background:transparent !important;object-fit:contain;image-rendering:crisp-edges;transition:transform .4s cubic-bezier(0.34,1.56,0.64,1);}
+#mascot-video.jump{animation:jump .6s cubic-bezier(0.34,1.56,0.64,1);}
+#mascot-video.dance{animation:dance .8s ease-in-out;}
+#mascot-video.hide{animation:hide .5s ease-in-out;}
+#mascot-video.spin{animation:spin .6s linear;}
+#mascot-video.nod{animation:nod .6s ease-in-out;}
+#mascot-video.wave{animation:wave 1s ease-in-out;}
+#mascot-video.impressed{animation:impressed .7s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes jump{0%{transform:translateY(0) scale(1);}50%{transform:translateY(-60px) scale(1.05);}100%{transform:translateY(0) scale(1);}}
+@keyframes dance{0%{transform:rotate(0deg) scale(1);}25%{transform:rotate(-4deg) scale(1.08) translateX(-8px);}50%{transform:rotate(4deg) scale(1.1) translateX(8px);}75%{transform:rotate(-4deg) scale(1.08) translateX(-8px);}100%{transform:rotate(0deg) scale(1);}}
+@keyframes hide{0%{transform:scale(1) opacity(1);}50%{transform:scale(0.85) translateY(10px) rotateZ(-5deg);}100%{transform:scale(1) opacity(1);}}
+@keyframes spin{0%{transform:rotateY(0deg);}100%{transform:rotateY(360deg);}}
+@keyframes nod{0%{transform:rotateX(0deg);}25%{transform:rotateX(-15deg);}50%{transform:rotateX(0deg);}75%{transform:rotateX(-15deg);}100%{transform:rotateX(0deg);}}
+@keyframes wave{0%{transform:rotate(0deg) translateX(0);}20%{transform:rotate(-8deg) translateX(-4px);}40%{transform:rotate(12deg) translateX(6px);}60%{transform:rotate(-8deg) translateX(-4px);}80%{transform:rotate(12deg) translateX(6px);}100%{transform:rotate(0deg) translateX(0);}}
+@keyframes impressed{0%{transform:scale(1) rotate(0deg);}25%{transform:scale(1.15) rotate(-3deg);}50%{transform:scale(1.2) rotate(3deg);}75%{transform:scale(1.15) rotate(-3deg);}100%{transform:scale(1) rotate(0deg);}}
+#cbubble{position:absolute;bottom:120%;left:50%;transform:translateX(-50%) scale(0);
   background:linear-gradient(135deg,#FFD700,#FF9800);border:3px solid white;border-radius:20px;
-  padding:8px 16px;font-size:clamp(14px,3.5vw,18px);color:white;white-space:nowrap;font-weight:600;
-  box-shadow:0 6px 20px rgba(0,0,0,.3);transition:transform .35s cubic-bezier(0.34,1.56,0.64,1);
-  pointer-events:none;z-index:20;}
-#cbubble::after{content:'';position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);
-  width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:12px solid #FF9800;}
+  padding:10px 18px;font-size:clamp(15px,3.8vw,20px);color:white;white-space:nowrap;font-weight:700;
+  box-shadow:0 8px 24px rgba(0,0,0,.35);transition:transform .3s cubic-bezier(0.34,1.56,0.64,1);
+  pointer-events:none;z-index:50;text-shadow:0 2px 4px rgba(0,0,0,.2);}
+#cbubble::after{content:'';position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);
+  width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:14px solid #FF9800;filter:drop-shadow(0 2px 3px rgba(0,0,0,.15));}
 #cbubble.show{transform:translateX(-50%) scale(1);}
 @media(max-width:599px){
   #mascot-container{left:8px;bottom:clamp(55px,14vw,80px);width:clamp(240px,55vw,380px);height:clamp(240px,55vw,380px);}
@@ -827,15 +841,10 @@ function cheerMascot(){
 }
 
 /* ══════════════════════════════════════════
-   MASCOT SAD (MISSED)
+   MASCOT SAD (MISSED) - Alias for hideMascot
 ══════════════════════════════════════════ */
 function sadMascot(){
-  const m=document.getElementById('mascot');
-  const b=document.getElementById('cbubble');
-  SFX.missSound();
-  b.textContent='NOOO!';
-  m.className='sad';b.classList.add('show');
-  setTimeout(()=>{m.className='';b.classList.remove('show');},1200);
+  hideMascot();
 }
 
 /* ═══════════════════════════════════════════
@@ -1029,7 +1038,16 @@ function initMascotVideo(){
 function setMascotAnimation(state,duration=2200){
   const img=document.getElementById('mascot-video');
   if(!img)return;
-  // GIF will animate automatically, no play control needed
+  // Remove all animation classes
+  img.classList.remove('jump','dance','hide','spin','nod','wave','impressed');
+  // Force reflow to restart animation
+  void img.offsetWidth;
+  // Add the appropriate animation class
+  const animMap={'cheer':'jump','dance':'dance','hide':'hide','idle':'spin','thinking':'spin','nod':'nod','wave':'wave','impressed':'impressed'};
+  const anim=animMap[state]||'jump';
+  img.classList.add(anim);
+  // Remove animation class after duration to allow re-triggering
+  setTimeout(()=>{img.classList.remove(anim);},duration);
 }
 
 // Unlock audio + auto-start music on first tap/click
