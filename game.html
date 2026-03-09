@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Color Quest!</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;900&display=swap');
 
@@ -69,17 +69,17 @@ body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
 
 /* ══ MASCOT ══ */
 #mascot-container{position:absolute;left:clamp(52px,3vw,80px);bottom:62px;z-index:10;width:clamp(250px,40vw,700px);height:clamp(250px,40vw,700px);display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;}
-#mascot-canvas{display:block !important;width:100% !important;height:100% !important;background:transparent !important;}
+#mascot-video{display:block !important;width:100% !important;height:100% !important;background:transparent !important;object-fit:contain;image-rendering:crisp-edges;}
 #cbubble{position:absolute;bottom:110%;left:50%;transform:translateX(-50%) scale(0);
   background:linear-gradient(135deg,#FFD700,#FF9800);border:3px solid white;border-radius:20px;
-  padding:5px 14px;font-size:clamp(12px,3vw,15px);color:white;white-space:nowrap;
-  box-shadow:0 4px 16px rgba(0,0,0,.22);transition:transform .35s cubic-bezier(0.34,1.56,0.64,1);
+  padding:8px 16px;font-size:clamp(14px,3.5vw,18px);color:white;white-space:nowrap;font-weight:600;
+  box-shadow:0 6px 20px rgba(0,0,0,.3);transition:transform .35s cubic-bezier(0.34,1.56,0.64,1);
   pointer-events:none;z-index:20;}
 #cbubble::after{content:'';position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);
   width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:12px solid #FF9800;}
 #cbubble.show{transform:translateX(-50%) scale(1);}
 @media(max-width:599px){
-  #mascot-container{left:8px;bottom:clamp(55px,14vw,80px);width:clamp(200px,45vw,300px);height:clamp(200px,45vw,300px);}
+  #mascot-container{left:8px;bottom:clamp(55px,14vw,80px);width:clamp(240px,55vw,380px);height:clamp(240px,55vw,380px);}
 }
 @media(max-width:380px){#mascot-container{display:none;}}
 
@@ -253,7 +253,7 @@ body{font-family:'Fredoka One',cursive;overflow:hidden;height:100vh;width:100vw;
 
 <!-- MASCOT -->
 <div id="mascot-container">
-  <canvas id="mascot-canvas"></canvas>
+  <img id="mascot-video" src="/images/cat.gif" alt="Mascot" />
   <div id="cbubble">Awesome!</div>
 </div>
 
@@ -1001,7 +1001,7 @@ function buildFence(){
 window.addEventListener('load',()=>{
   buildClouds();buildTrees();buildFlowers();buildFence();
   levels=buildLevels();
-  try{init3DCat();}catch(e){console.error('3D cat init error:',e);}
+  initMascotVideo();
   setTimeout(()=>SFX.load(),1200);
   setTimeout(()=>{
     const ls=document.getElementById('loading-screen');
@@ -1014,122 +1014,22 @@ window.addEventListener('load',()=>{
 });
 
 /* ══════════════════════════════════════════
-   3D CAT MASCOT (Three.js)
+   MASCOT VIDEO PLAYER
 ══════════════════════════════════════════ */
-let mascot3D=null,mascotScene,mascotCamera,mascotRenderer,mascotCat;
-function init3DCat(){
-  try{
-    if(mascot3D)return;
-    const container=document.getElementById('mascot-container');
-    if(!container){console.warn('No mascot container found');return;}
-    const canvas=document.getElementById('mascot-canvas');
-    if(!canvas){console.warn('No mascot canvas found');return;}
-    if(typeof THREE==='undefined'){console.warn('Three.js not loaded');return;}
-    const w=container.clientWidth,h=container.clientHeight;
-    if(w===0||h===0){console.warn('Container has no dimensions');return;}
-    mascotScene=new THREE.Scene();mascotScene.background=new THREE.Color(0x000000);
-    mascotCamera=new THREE.PerspectiveCamera(60,w/h,0.1,1000);
-    mascotCamera.position.set(0,0,12);
-    mascotRenderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,preserveDrawingBuffer:true});
-    mascotRenderer.setSize(w,h);
-    mascotRenderer.setClearColor(0xffffff,0);
-    mascotRenderer.pixelRatio=Math.min(window.devicePixelRatio,2);
-    console.log('3D Cat: Canvas',w,'x',h,'| Renderer initialized');
-    
-    // Lighting
-    const ambLight=new THREE.AmbientLight(0xffffff,0.8);mascotScene.add(ambLight);
-    const dirLight=new THREE.DirectionalLight(0xffffff,0.6);dirLight.position.set(5,8,10);mascotScene.add(dirLight);
-    const backLight=new THREE.DirectionalLight(0xff9999,0.3);backLight.position.set(-5,-3,-10);mascotScene.add(backLight);
-    
-    mascotCat=createCatGeometry();mascotScene.add(mascotCat);
-    mascot3D={scene:mascotScene,camera:mascotCamera,renderer:mascotRenderer,cat:mascotCat,time:0,animState:'idle'};
-    console.log('3D Cat: Geometry created and added to scene');
-    window.addEventListener('resize',()=>resizeCatCanvas());
-    animateCat();
-  }catch(e){console.error('3D cat initialization failed:',e);}
-}
-function createCatGeometry(){
-  const group=new THREE.Group();
-  const skin='#FF9966',eyes='#000000',nose='#FF6699',inner='#FFCCEE';
-  
-  // Head
-  const headG=new THREE.SphereGeometry(2.5,32,32);
-  const headM=new THREE.MeshPhongMaterial({color:skin,shininess:30});
-  const head=new THREE.Mesh(headG,headM);group.add(head);
-  
-  // Left Ear
-  const earL=new THREE.Group();
-  const earLG=new THREE.ConeGeometry(1.2,2.4,32);const earLM=new THREE.MeshPhongMaterial({color:skin});
-  const ear1L=new THREE.Mesh(earLG,earLM);ear1L.position.set(-1.5,2.8,0);ear1L.rotation.z=-0.3;earL.add(ear1L);
-  const earIL=new THREE.SphereGeometry(0.5,16,16);const earIM=new THREE.MeshPhongMaterial({color:inner});
-  const ear2L=new THREE.Mesh(earIL,earIM);ear2L.position.set(-1.5,2.4,0.6);earL.add(ear2L);
-  group.add(earL);
-  
-  // Right Ear
-  const earR=new THREE.Group();
-  const earRG=new THREE.ConeGeometry(1.2,2.4,32);const earRM=new THREE.MeshPhongMaterial({color:skin});
-  const ear1R=new THREE.Mesh(earRG,earRM);ear1R.position.set(1.5,2.8,0);ear1R.rotation.z=0.3;earR.add(ear1R);
-  const ear2R=new THREE.Mesh(earIL,earIM);ear2R.position.set(1.5,2.4,0.6);earR.add(ear2R);
-  group.add(earR);
-  
-  // Eyes
-  const eyeG=new THREE.SphereGeometry(0.7,16,16);const eyeM=new THREE.MeshPhongMaterial({color:eyes});
-  const eyeL=new THREE.Mesh(eyeG,eyeM);eyeL.position.set(-1.1,1.2,2.2);group.add(eyeL);
-  const eyeR=new THREE.Mesh(eyeG,eyeM);eyeR.position.set(1.1,1.2,2.2);group.add(eyeR);
-  
-  // Pupils
-  const pupilG=new THREE.SphereGeometry(0.3,8,8);const pupilM=new THREE.MeshPhongMaterial({color:'#2196F3'});
-  const pupilL=new THREE.Mesh(pupilG,pupilM);pupilL.position.set(-1.1,1.2,2.7);pupilL.userData.isMascot=true;group.add(pupilL);
-  const pupilR=new THREE.Mesh(pupilG,pupilM);pupilR.position.set(1.1,1.2,2.7);pupilR.userData.isMascot=true;group.add(pupilR);
-  
-  // Nose
-  const noseG=new THREE.SphereGeometry(0.6,16,16);const noseM=new THREE.MeshPhongMaterial({color:nose});
-  const nose_=new THREE.Mesh(noseG,noseM);nose_.position.set(0,-0.5,2.8);group.add(nose_);
-  
-  // Mouth
-  const mouthG=new THREE.TorusGeometry(0.8,0.3,16,8,Math.PI);const mouthM=new THREE.MeshPhongMaterial({color:eyes});
-  const mouth=new THREE.Mesh(mouthG,mouthM);mouth.position.set(0,-1.2,2.6);mouth.rotation.x=Math.PI;group.add(mouth);
-  
-  // Body
-  const bodyG=new THREE.CylinderGeometry(1.8,1.5,3,32);
-  const bodyM=new THREE.MeshPhongMaterial({color:skin});
-  const body=new THREE.Mesh(bodyG,bodyM);body.position.set(0,-3.5,0);group.add(body);
-  
-  // Tail
-  const tailG=new THREE.ConeGeometry(0.8,4.5,16);const tailM=new THREE.MeshPhongMaterial({color:skin});
-  const tail=new THREE.Mesh(tailG,tailM);tail.position.set(2.2,-2.5,-1);tail.rotation.z=1.2;tail.userData.tail=true;group.add(tail);
-  
-  group.scale.set(1,1,1);return group;
-}
-function animateCat(){
-  if(!mascot3D)return;requestAnimationFrame(animateCat);
-  mascot3D.time+=0.016;
-  const cat=mascot3D.cat;
-  const s=mascot3D.animState;
-  
-  // Idle bounce
-  if(s==='idle'){cat.position.y=Math.sin(mascot3D.time*2.5)*0.3;cat.rotation.z=Math.sin(mascot3D.time*1.5)*0.05;}
-  else if(s==='cheer'){cat.position.y=Math.sin(mascot3D.time*5)*0.6;cat.scale.set(1.1,1.1,1.1);}
-  else if(s==='dance'){cat.rotation.z=Math.sin(mascot3D.time*4)*0.3;cat.position.y=Math.abs(Math.sin(mascot3D.time*5))*0.8;}
-  else if(s==='hide'){cat.scale.set(0.85+Math.sin(mascot3D.time*3)*0.05,0.85+Math.sin(mascot3D.time*3)*0.05,0.85);cat.rotation.z=Math.sin(mascot3D.time*2)*0.2;}
-  else if(s==='impressed'){cat.scale.set(1.15+Math.sin(mascot3D.time*5)*0.1,1.15+Math.sin(mascot3D.time*5)*0.1,1.15);}
-  
-  try{mascotRenderer.render(mascotScene,mascotCamera);}catch(e){console.error('Render error:',e);}
+function initMascotVideo(){
+  const img=document.getElementById('mascot-video');
+  if(!img){console.warn('No mascot GIF element found');return;}
+  img.src='/images/cat.gif';
 }
 function setMascotAnimation(state,duration=2200){
-  if(!mascot3D)return;mascot3D.animState=state;mascot3D.time=0;
-  setTimeout(()=>{if(mascot3D)mascot3D.animState='idle';},duration);
-}
-function resizeCatCanvas(){
-  const container=document.getElementById('mascot-container');
-  if(!container||!mascot3D)return;const w=container.clientWidth,h=container.clientHeight;
-  mascotCamera.aspect=w/h;mascotCamera.updateProjectionMatrix();mascotRenderer.setSize(w,h);
+  const img=document.getElementById('mascot-video');
+  if(!img)return;
+  // GIF will animate automatically, no play control needed
 }
 
 // Unlock audio + auto-start music on first tap/click
 let musicStarted=false;
 document.addEventListener('click',()=>{
-  if(!mascot3D)init3DCat();
   try{gAC().resume();}catch(e){}
   if(!musicStarted){
     musicStarted=true;
