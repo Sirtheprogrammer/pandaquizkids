@@ -1009,9 +1009,7 @@ function buildFence(){
   for(let i=0;i<n;i++){const p=document.createElement('div');p.className='fence-post';f.appendChild(p);}
 }
 
-/* ══════════════════════════════════════════
-   INIT
-══════════════════════════════════════════ */
+
 window.addEventListener('load',()=>{
   buildClouds();buildTrees();buildFlowers();buildFence();
   levels=buildLevels();
@@ -1027,9 +1025,7 @@ window.addEventListener('load',()=>{
   },3400);
 });
 
-/* ══════════════════════════════════════════
-   MASCOT GIF PLAYER
-══════════════════════════════════════════ */
+
 function initMascotVideo(){
   const img=document.getElementById('mascot-video');
   if(!img){console.warn('No mascot GIF element found');return;}
