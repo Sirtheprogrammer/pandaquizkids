@@ -14,13 +14,14 @@ Route::get('/', function () {
     return view('welcome', compact('games', 'categories'));
 });
 
-// Static Pages
-Route::get('/privacy', function () {
-    return view('privacy');
+Route::get('/privacy-policy', function () {
+    $categories = \App\Models\Category::orderBy('name')->get();
+    return view('privacy', compact('categories'));
 })->name('privacy');
 
-Route::get('/terms', function () {
-    return view('terms');
+Route::get('/terms-and-conditions', function () {
+    $categories = \App\Models\Category::orderBy('name')->get();
+    return view('terms', compact('categories'));
 })->name('terms');
 
 // Game routes
