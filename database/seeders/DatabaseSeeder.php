@@ -16,18 +16,29 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Create Admin User
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@pandakidquiz.com',
-            'password' => bcrypt('Pandaquiz123#'),
-            'is_admin' => true,
-        ]);
+        User::firstOrCreate(
+            ['email' => 'admin@pandakidquiz.com'],
+            [
+                'name' => 'Admin',
+                'password' => bcrypt('Pandaquiz123#'),
+                'is_admin' => true,
+            ]
+        );
 
         // Create Test User
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'is_admin' => false,
-        ]);
+        User::firstOrCreate(
+            ['email' => 'test@example.com'],
+            [
+                'name' => 'Test User',
+                'password' => bcrypt('test123'),
+                'is_admin' => false,
+            ]
+        );
+
+        // Run Category Seeder
+        $this->call(CategorySeeder::class);
+
+        // Run Game Seeder
+        $this->call(GameSeeder::class);
     }
 }

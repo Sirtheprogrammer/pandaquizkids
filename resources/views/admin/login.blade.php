@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - Panda Quiz</title>
+    <title>Admin Login – Panda Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,8 +13,8 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-            background: linear-gradient(135deg, #1a1a4e 0%, #2d1b69 40%, #11998e 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f5f7fa;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -21,257 +22,372 @@
             padding: 20px;
         }
 
-        .login-container {
+        /* ─── Card ─── */
+        .login-card {
             width: 100%;
-            max-width: 420px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
+            max-width: 400px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.09);
+            overflow: hidden;
         }
 
-        .login-header {
-            text-align: center;
-            margin-bottom: 40px;
+        /* ─── Top accent bar ─── */
+        .card-accent {
+            height: 5px;
+            background: #9B59B6;
         }
 
-        .logo {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            background: linear-gradient(135deg, #FFD700 0%, #FF9800 100%);
-            border-radius: 20px;
+        /* ─── Card body ─── */
+        .card-body {
+            padding: 40px 36px 36px;
+        }
+
+        /* ─── Logo / brand ─── */
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .brand-icon {
+            width: 48px;
+            height: 48px;
+            background: #9B59B6;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
-            font-weight: bold;
-            color: white;
-            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            flex-shrink: 0;
         }
 
-        .login-header h1 {
-            font-size: 28px;
-            color: #2d1b69;
-            margin-bottom: 8px;
+        .brand-text h1 {
+            font-size: 18px;
             font-weight: 700;
+            color: #2d1b69;
+            line-height: 1.2;
         }
 
-        .login-header p {
-            color: #666;
-            font-size: 14px;
+        .brand-text p {
+            font-size: 12px;
+            color: #999;
+            margin-top: 2px;
         }
 
+        /* ─── Section title ─── */
+        .login-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2d1b69;
+            margin-bottom: 6px;
+        }
+
+        .login-subtitle {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 28px;
+        }
+
+        /* ─── Alert ─── */
+        .alert-error {
+            background: #fdf3f4;
+            border: 1px solid #f8d7da;
+            border-left: 4px solid #e74c3c;
+            color: #c0392b;
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ─── Form ─── */
         .form-group {
             margin-bottom: 20px;
         }
 
-        label {
+        .form-label {
             display: block;
-            margin-bottom: 8px;
-            color: #2d1b69;
+            margin-bottom: 7px;
+            font-size: 13px;
             font-weight: 600;
-            font-size: 14px;
+            color: #2d1b69;
         }
 
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #E0E0E0;
-            border-radius: 12px;
+        /* Input with icon */
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #bbb;
             font-size: 16px;
-            transition: all 0.3s ease;
-            background: #F8F9FA;
+            pointer-events: none;
         }
 
-        input[type="email"]:focus,
-        input[type="password"]:focus {
+        .form-input {
+            width: 100%;
+            padding: 11px 14px 11px 38px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background: #fafafa;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+            font-family: inherit;
+        }
+
+        .form-input::placeholder {
+            color: #bbb;
+        }
+
+        .form-input:focus {
             outline: none;
             border-color: #9B59B6;
-            background: white;
+            background: #fff;
             box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.1);
         }
 
-        input[type="email"]::placeholder,
-        input[type="password"]::placeholder {
-            color: #999;
+        /* Toggle password visibility */
+        .toggle-pass {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #bbb;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 0;
+            line-height: 1;
+            transition: color 0.2s;
         }
 
-        .error-message {
+        .toggle-pass:hover {
+            color: #9B59B6;
+        }
+
+        /* Field-level error */
+        .field-error {
             color: #e74c3c;
-            font-size: 13px;
-            margin-top: 6px;
-            display: none;
-        }
-
-        .error-message.show {
-            display: block;
-        }
-
-        .remember-me {
+            font-size: 12px;
+            margin-top: 5px;
             display: flex;
             align-items: center;
+            gap: 4px;
+        }
+
+        /* ─── Remember me ─── */
+        .remember-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             margin-bottom: 24px;
         }
 
-        input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            margin-right: 8px;
-            cursor: pointer;
+        .remember-row input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
             accent-color: #9B59B6;
-        }
-
-        .remember-me label {
-            margin: 0;
-            font-weight: 500;
-            font-size: 14px;
             cursor: pointer;
-            color: #333;
+            flex-shrink: 0;
         }
 
+        .remember-row label {
+            font-size: 13px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        /* ─── Submit button ─── */
         .btn-login {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%);
-            color: white;
+            padding: 12px;
+            background: #9B59B6;
+            color: #fff;
             border: none;
-            border-radius: 12px;
-            font-size: 16px;
+            border-radius: 8px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.3);
-            margin-bottom: 16px;
+            transition: background 0.2s, transform 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: inherit;
         }
 
         .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 24px rgba(155, 89, 182, 0.4);
+            background: #8E44AD;
         }
 
         .btn-login:active {
-            transform: translateY(0);
+            transform: scale(0.99);
         }
 
-        .btn-login:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+        /* ─── Divider ─── */
+        .divider {
+            border: none;
+            border-top: 1px solid #f0f0f0;
+            margin: 24px 0 16px;
         }
 
+        /* ─── Back link ─── */
         .back-link {
             text-align: center;
+            font-size: 13px;
+            color: #999;
         }
 
         .back-link a {
             color: #9B59B6;
             text-decoration: none;
-            font-size: 14px;
             font-weight: 500;
-            transition: color 0.3s ease;
         }
 
         .back-link a:hover {
-            color: #8E44AD;
             text-decoration: underline;
         }
 
-        .alert {
-            padding: 12px 16px;
-            border-radius: 12px;
-            margin-bottom: 24px;
-            font-size: 14px;
-            display: none;
-        }
-
-        .alert.error {
-            background: #ffe5e5;
-            color: #c0392b;
-            border: 1px solid #e74c3c;
-            display: block;
-        }
-
-        @media (max-width: 480px) {
-            .login-container {
-                padding: 30px 20px;
+        /* ─── Mobile ─── */
+        @media (max-width: 460px) {
+            .card-body {
+                padding: 28px 20px 24px;
             }
 
-            .login-header h1 {
-                font-size: 24px;
-            }
-
-            .logo {
-                width: 70px;
-                height: 70px;
-                font-size: 35px;
-            }
-
-            .btn-login {
-                padding: 12px;
-                font-size: 15px;
+            .login-title {
+                font-size: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-header">
-            <div class="logo">🎓</div>
-            <h1>Admin Panel</h1>
-            <p>Panda Quiz Management</p>
+
+    <div class="login-card">
+        <div class="card-accent"></div>
+
+        <div class="card-body">
+
+            <!-- Brand -->
+            <div class="brand">
+                <div class="brand-icon">P</div>
+                <div class="brand-text">
+                    <h1>Panda Quiz</h1>
+                    <p>Admin Panel</p>
+                </div>
+            </div>
+
+            <!-- Title -->
+            <div class="login-title">Sign in</div>
+            <div class="login-subtitle">Enter your credentials to access the dashboard</div>
+
+            <!-- Error alert -->
+            @if ($errors->any())
+                <div class="alert-error">
+                    <i class="bi bi-exclamation-circle-fill"></i>
+                    {{ $errors->first() }}
+                </div>
+            @endif
+
+            <!-- Form -->
+            <form method="POST" action="{{ route('admin.login.post') }}">
+                @csrf
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <div class="input-wrap">
+                        <i class="bi bi-envelope input-icon"></i>
+                        <input
+                            class="form-input"
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="you@example.com"
+                            value="{{ old('email') }}"
+                            required
+                            autocomplete="email"
+                        />
+                    </div>
+                    @error('email')
+                        <div class="field-error">
+                            <i class="bi bi-exclamation-circle"></i> {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <div class="input-wrap">
+                        <i class="bi bi-lock input-icon"></i>
+                        <input
+                            class="form-input"
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="••••••••"
+                            required
+                            autocomplete="current-password"
+                        />
+                        <button type="button" class="toggle-pass" onclick="togglePassword()" id="toggle-btn" aria-label="Toggle password">
+                            <i class="bi bi-eye" id="toggle-icon"></i>
+                        </button>
+                    </div>
+                    @error('password')
+                        <div class="field-error">
+                            <i class="bi bi-exclamation-circle"></i> {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <!-- Remember me -->
+                <div class="remember-row">
+                    <input type="checkbox" id="remember" name="remember" />
+                    <label for="remember">Keep me signed in</label>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="btn-login">
+                    <i class="bi bi-box-arrow-in-right"></i>
+                    Sign In
+                </button>
+
+                <hr class="divider">
+
+                <div class="back-link">
+                    <a href="{{ url('/') }}">← Back to app</a>
+                </div>
+
+            </form>
         </div>
-
-        @if ($errors->any())
-            <div class="alert error">
-                {{ $errors->first() }}
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('admin.login.post') }}">
-            @csrf
-
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="admin@pandakidquiz.com"
-                    value="{{ old('email') }}"
-                    required
-                />
-                @error('email')
-                    <div class="error-message show">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Enter your password"
-                    required
-                />
-                @error('password')
-                    <div class="error-message show">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="remember-me">
-                <input type="checkbox" id="remember" name="remember" />
-                <label for="remember">Remember me</label>
-            </div>
-
-            <button type="submit" class="btn-login">Sign In</button>
-
-            <div class="back-link">
-                <a href="{{ route('games.index') }}">← Back to Game</a>
-            </div>
-        </form>
     </div>
+
+    <script>
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const icon  = document.getElementById('toggle-icon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'bi bi-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'bi bi-eye';
+            }
+        }
+    </script>
+
 </body>
 </html>
