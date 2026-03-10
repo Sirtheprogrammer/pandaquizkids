@@ -677,11 +677,9 @@
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-close" id="closeSidebarBtn"><i class="fas fa-times"></i></div>
         <nav>
-            <a href="#"><i class="fas fa-house"></i> Home</a>
-            <a href="#"><i class="fas fa-gamepad"></i> All games</a>
-            <a href="#"><i class="fas fa-star"></i> Favourites</a>
-            <a href="#"><i class="fas fa-bear"></i> Panda tips</a>
-            <a href="#"><i class="fas fa-circle-info"></i> Parents</a>
+            <a href="{{ url('/') }}"><i class="fas fa-home"></i> Home</a>
+            <a href="{{ url('/privacy') }}"><i class="fas fa-user-shield"></i> Privacy Policy</a>
+            <a href="{{ url('/terms') }}"><i class="fas fa-file-contract"></i> Terms of Service</a>
         </nav>
     </aside>
 

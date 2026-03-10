@@ -14,6 +14,15 @@ Route::get('/', function () {
     return view('welcome', compact('games', 'categories'));
 });
 
+// Static Pages
+Route::get('/privacy', function () {
+    return view('privacy');
+})->name('privacy');
+
+Route::get('/terms', function () {
+    return view('terms');
+})->name('terms');
+
 // Game routes
 Route::get('/play/{gameId}', [GameController::class, 'play'])->name('games.play');
 
