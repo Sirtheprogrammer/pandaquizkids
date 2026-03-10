@@ -29,6 +29,12 @@ Route::prefix('admin')->group(function () {
         Route::resource('/games', AdminGameController::class, ['as' => 'admin']);
         Route::resource('/categories', CategoryController::class, ['as' => 'admin']);
         Route::resource('/admins', AdminUserController::class, ['as' => 'admin'])->only(['index', 'create', 'store', 'destroy']);
+        
+        // Settings
+        Route::get('/settings', [\App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('admin.settings');
+        Route::put('/settings/profile', [\App\Http\Controllers\Admin\SettingsController::class, 'updateProfile'])->name('admin.settings.profile');
+        Route::put('/settings/password', [\App\Http\Controllers\Admin\SettingsController::class, 'updatePassword'])->name('admin.settings.password');
+        
         Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
     });
 });

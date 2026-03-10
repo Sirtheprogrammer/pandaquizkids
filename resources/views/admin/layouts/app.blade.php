@@ -489,6 +489,12 @@
                     <span>Admins</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.settings') }}" class="nav-link {{ (request()->routeIs('admin.settings.*') || request()->routeIs('admin.settings')) ? 'active' : '' }}">
+                    <span class="nav-icon"><i class="bi bi-gear"></i></span>
+                    <span>Settings</span>
+                </a>
+            </li>
         </nav>
     </aside>
 
