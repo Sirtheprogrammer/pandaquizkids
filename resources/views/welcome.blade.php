@@ -3,7 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PandaQuizKids · playful games</title>
+    <title>PandaQuizKids · Playful Educational Games for Kids</title>
+    <meta name="description" content="PandaQuizKids offers fun, interactive, and educational games for children. Kids can learn colors, letters, numbers, and logic in a playful and safe environment.">
+    <meta name="keywords" content="kids games, educational games, learning games, panda quiz, math for kids, memory games, coloring for kids">
+    <link rel="canonical" href="{{ url('/') }}" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url('/') }}">
+    <meta property="og:title" content="PandaQuizKids · Playful Educational Games for Kids">
+    <meta property="og:description" content="PandaQuizKids offers fun, interactive, and educational games for children. Kids can learn colors, letters, numbers, and logic in a playful and safe environment.">
+    <meta property="og:image" content="{{ asset('images/cat.gif') }}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ url('/') }}">
+    <meta property="twitter:title" content="PandaQuizKids · Playful Educational Games for Kids">
+    <meta property="twitter:description" content="PandaQuizKids offers fun, interactive, and educational games for children. Kids can learn colors, letters, numbers, and logic in a playful and safe environment.">
+    <meta property="twitter:image" content="{{ asset('images/cat.gif') }}">
 
     <!-- Fonts & icons (kid‑friendly, solid) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

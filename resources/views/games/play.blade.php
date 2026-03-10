@@ -3,7 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Color Quest!</title>
+<title>{{ $game->title }} - PandaQuizKids</title>
+<meta name="description" content="{{ $game->description ?? 'Play ' . $game->title . ' on PandaQuizKids. A fun and educational game for children.' }}">
+<meta name="keywords" content="{{ strtolower($game->category) }} games, kids game, {{ strtolower($game->title) }}, educational games">
+<link rel="canonical" href="{{ route('games.play', ['gameId' => $game->slug]) }}" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ route('games.play', ['gameId' => $game->slug]) }}">
+<meta property="og:title" content="{{ $game->title }} - PandaQuizKids">
+<meta property="og:description" content="{{ $game->description ?? 'Play ' . $game->title . ' on PandaQuizKids. A fun and educational game for children.' }}">
+@if($game->image)
+<meta property="og:image" content="{{ url($game->image) }}">
+@else
+<meta property="og:image" content="{{ asset('images/cat.gif') }}">
+@endif
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ route('games.play', ['gameId' => $game->slug]) }}">
+<meta property="twitter:title" content="{{ $game->title }} - PandaQuizKids">
+<meta property="twitter:description" content="{{ $game->description ?? 'Play ' . $game->title . ' on PandaQuizKids. A fun and educational game for children.' }}">
+@if($game->image)
+<meta property="twitter:image" content="{{ url($game->image) }}">
+@else
+<meta property="twitter:image" content="{{ asset('images/cat.gif') }}">
+@endif
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;900&display=swap');
