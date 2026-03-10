@@ -11,16 +11,12 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $totalUsers = User::count();
         $adminUsers = User::where('is_admin', true)->count();
-        $regularUsers = User::where('is_admin', false)->count();
         $totalGames = Game::count();
         $totalCategories = Category::count();
 
         return view('admin.dashboard', compact(
-            'totalUsers',
             'adminUsers',
-            'regularUsers',
             'totalGames',
             'totalCategories'
         ));

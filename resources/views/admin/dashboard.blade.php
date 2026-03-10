@@ -189,19 +189,6 @@
 <!-- ── Statistics ── -->
 <div class="stats-grid">
 
-    <div class="stat-card total">
-        <div class="stat-header">
-            <div>
-                <div class="stat-number">{{ $totalUsers }}</div>
-                <div class="stat-label">Total Users</div>
-                <div class="stat-desc">All registered users</div>
-            </div>
-            <div class="stat-icon-box" style="background-color:#fff8e1; color:#FFD700;">
-                <i class="bi bi-people-fill"></i>
-            </div>
-        </div>
-    </div>
-
     <div class="stat-card admin">
         <div class="stat-header">
             <div>
@@ -211,19 +198,6 @@
             </div>
             <div class="stat-icon-box" style="background-color:#f3e6f6; color:#9B59B6;">
                 <i class="bi bi-shield-check"></i>
-            </div>
-        </div>
-    </div>
-
-    <div class="stat-card players">
-        <div class="stat-header">
-            <div>
-                <div class="stat-number">{{ $regularUsers }}</div>
-                <div class="stat-label">Players</div>
-                <div class="stat-desc">Active players</div>
-            </div>
-            <div class="stat-icon-box" style="background-color:#e8f5e9; color:#6EC840;">
-                <i class="bi bi-joystick"></i>
             </div>
         </div>
     </div>
